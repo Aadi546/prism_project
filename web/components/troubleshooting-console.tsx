@@ -370,7 +370,7 @@ export function TroubleshootingConsole() {
                 </Card>
               ) : null}
 
-              {result.query_variations.length ? (
+              {goal && result.query_variations.length ? (
                 <Card>
                   <CardHeader>
                     <CardTitle>Cached paraphrases</CardTitle>
