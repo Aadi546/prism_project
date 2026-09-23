@@ -1,0 +1,62 @@
+[
+  {
+    "id": "q_swipe",
+    "domain": "display",
+    "text": "phone swipe gestures wrong direction after app install"
+  },
+  {
+    "id": "q_battery",
+    "domain": "battery",
+    "text": "the battery dies fast even when I barely use the phone"
+  },
+  {
+    "id": "q_flicker",
+    "domain": "display",
+    "text": "Screen flickers and the battery dies fast"
+  },
+  {
+    "id": "q_camera",
+    "domain": "camera",
+    "text": "camera got blurry after the update"
+  },
+  {
+    "id": "q_slow",
+    "domain": "performance",
+    "text": "My phone got slow after the update"
+  },
+  {
+    "id": "q_heat",
+    "domain": "battery",
+    "text": "phone gets really hot on the wireless charger overnight"
+  },
+  {
+    "id": "q_dark",
+    "domain": "display",
+    "text": "dark mode is not applying and apps stay bright at night"
+  },
+  {
+    "id": "q_video",
+    "domain": "camera",
+    "text": "videos shake too much when I walk"
+  },
+  {
+    "id": "q_storage",
+    "domain": "performance",
+    "text": "storage is full so gallery cannot save photos"
+  },
+  {
+    "id": "q_ir",
+    "domain": "performance",
+    "text": "universal remote cannot find the infrared blaster"
+  },
+  {
+    "id": "q_typo_swipe",
+    "domain": "display",
+    "text": "swype navigaton going up down not sideways after app"
+  },
+  {
+    "id": "q_formal_battery",
+    "domain": "battery",
+    "text": "Device exhibits accelerated battery discharge during idle periods"
+  }
+]

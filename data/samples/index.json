@@ -1,0 +1,27 @@
+[
+  {
+    "file": "01_swipe_navigation.json",
+    "query": "The mobile phone swipe navigation moves up or down instead of left or right after downloading an app",
+    "article_id": "siis_swipe_axis"
+  },
+  {
+    "file": "02_battery_drain.json",
+    "query": "My battery dies fast even on standby",
+    "article_id": "siis_battery_fast_drain"
+  },
+  {
+    "file": "03_screen_flicker.json",
+    "query": "Screen flickers at night when the brightness is low",
+    "article_id": "siis_screen_flicker"
+  },
+  {
+    "file": "04_camera_blur.json",
+    "query": "Photos look smeared and the camera hunts for focus",
+    "article_id": "siis_camera_blur"
+  },
+  {
+    "file": "05_slow_update.json",
+    "query": "Galaxy got laggy after the software update",
+    "article_id": "siis_slow_after_update"
+  }
+]

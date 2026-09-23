@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+web/node_modules/
+web/.next/
+.cache/
+engine_cache.json

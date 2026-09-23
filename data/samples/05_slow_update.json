@@ -1,0 +1,157 @@
+{
+  "query": "Galaxy got laggy after the software update",
+  "query_variations": [
+    "Galaxy got laggy after the software update",
+    "device got slow performance after the software update",
+    "Please advise how to fix this: device got slow performance after the software update.",
+    "ugh my device got slow performance after the software update this is so annoying",
+    "device got slow performance after the software update help",
+    "dveice got slow preformance atfer the sfotware udpate",
+    "Device issue: device got slow performance after the software update",
+    "why does my device device got slow performance after the software update",
+    "Need troubleshooting for device got slow performance after the software update",
+    "device got slow performance after the software update after installing an app"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this System Performance Troubleshooting",
+        "title": "Performance after update",
+        "actions": [
+          {
+            "actionName": "Run Device Care Optimize",
+            "description": "It will free memory and cached files",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Battery and device care.",
+                  "Tap Optimize now and wait for the scan to finish."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/device_care",
+                  "description": "Open Device care",
+                  "message": "Clean battery storage and memory",
+                  "classes": {
+                    "screen": "device_care",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Clear Cached Files",
+            "description": "It will drop leftover update caches",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Open Storage in Device care.",
+                  "Tap Clean now on cached files.",
+                  "Remove large junk files if storage is under ten percent free."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/cache_partition",
+                  "description": "Open storage cache cleaning",
+                  "message": "Clear cached files that pile up after updates",
+                  "classes": {
+                    "screen": "cache_partition",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Tune Ram Plus",
+            "description": "It will stop slow virtual memory",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Open Memory in Device care.",
+                  "Tap RAM Plus.",
+                  "Choose 2 GB or Off if the phone stutters while swapping."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/ram_plus",
+                  "description": "Open RAM Plus",
+                  "message": "Use storage as extra virtual memory",
+                  "classes": {
+                    "screen": "ram_plus",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Reduce Animation Scales",
+            "description": "It will make transitions feel faster",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Enable developer options by tapping Build number seven times.",
+                  "Set Window, Transition, and Animator scales to 0.5x."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/window_animation_scale",
+                  "description": "Open window animation scale",
+                  "message": "Speed up or disable window animations",
+                  "classes": {
+                    "screen": "window_animation_scale",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Restart After Indexing",
+            "description": "It will finish leftover update work",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Leave the device plugged in on Wi-Fi for one hour.",
+                  "Restart from the power menu.",
+                  "If it is still unusable after two days, consider a factory reset as last resort."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/auto_optimization",
+                  "description": "Open auto optimization",
+                  "message": "Restart and optimize on a schedule",
+                  "classes": {
+                    "screen": "auto_optimization",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.9808228015899658
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 1.13,
+    "cache_hit": false,
+    "model": "hybrid-bm25-ngram",
+    "cost_usd": 0.0,
+    "fallback": null
+  }
+}

@@ -1,0 +1,1360 @@
+[
+  {
+    "deeplink": "bixby://masked/act/battery",
+    "description": "Open Battery settings",
+    "message": "View battery level and power options",
+    "qna_description": "battery parent menu",
+    "domain": "battery",
+    "depth": 1,
+    "parent": null,
+    "originalType": "Settings",
+    "classes": {
+      "screen": "battery",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/battery_usage",
+    "description": "Open battery usage by app",
+    "message": "See which apps drain the battery",
+    "qna_description": "app battery consumption list",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "battery_usage",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/adaptive_battery",
+    "description": "Open Adaptive battery",
+    "message": "Limit battery for unused apps",
+    "qna_description": "adaptive battery unused apps",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "adaptive_battery",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/power_saving",
+    "description": "Open Power saving mode",
+    "message": "Turn on power saving",
+    "qna_description": "power saving battery saver",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "power_saving",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/battery_protection",
+    "description": "Open battery protection",
+    "message": "Limit charge to protect battery health",
+    "qna_description": "protect battery max 80 95 charging",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "battery_protection",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/charging_settings",
+    "description": "Open charging settings",
+    "message": "Choose fast charging options",
+    "qna_description": "fast charging wireless charging toggle",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "charging_settings",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/fast_charging",
+    "description": "Open fast charging",
+    "message": "Enable or disable fast charging",
+    "qna_description": "super fast charging cable",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "charging_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "fast_charging",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/wireless_charging",
+    "description": "Open wireless charging",
+    "message": "Enable wireless charging",
+    "qna_description": "wireless charger pad",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "charging_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "wireless_charging",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/show_battery_percentage",
+    "description": "Show battery percentage",
+    "message": "Display remaining battery percent in status bar",
+    "qna_description": "battery percent icon",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "show_battery_percentage",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/background_usage_limits",
+    "description": "Open background usage limits",
+    "message": "Put unused apps to sleep",
+    "qna_description": "sleeping apps deep sleeping background",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "background_usage_limits",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/put_apps_to_sleep",
+    "description": "Put unused apps to sleep",
+    "message": "Sleep apps that drain battery in background",
+    "qna_description": "put apps to sleep",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "background_usage_limits",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "put_apps_to_sleep",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/deep_sleeping_apps",
+    "description": "Open deep sleeping apps",
+    "message": "Deep sleep apps that should never run",
+    "qna_description": "deep sleeping apps list",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "background_usage_limits",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "deep_sleeping_apps",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/app_power_management",
+    "description": "Open app power management",
+    "message": "Control per-app battery usage",
+    "qna_description": "never sleeping apps battery",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "app_power_management",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/wireless_power_share",
+    "description": "Open Wireless power share",
+    "message": "Share battery with another device",
+    "qna_description": "battery share reverse wireless",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "wireless_power_share",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/battery_information",
+    "description": "Open battery information",
+    "message": "See battery health and cycle count",
+    "qna_description": "battery capacity health",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "battery_information",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/sleep_standby_optimization",
+    "description": "Open sleep standby optimization",
+    "message": "Save battery overnight",
+    "qna_description": "sleep charging optimization",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "sleep_standby_optimization",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/extra_dim_battery",
+    "description": "Open extra dim related power tips",
+    "message": "Lower brightness to save battery",
+    "qna_description": "dim screen save power",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "extra_dim_battery",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/adaptive_refresh_battery",
+    "description": "Open motion smoothness for battery",
+    "message": "Use standard refresh to save power",
+    "qna_description": "120hz battery drain refresh rate",
+    "domain": "battery",
+    "depth": 2,
+    "parent": "battery",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "adaptive_refresh_battery",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/charging_notification",
+    "description": "Open charging notification settings",
+    "message": "Show charging speed alerts",
+    "qna_description": "charging notification",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "charging_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "charging_notification",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/protect_battery_basic",
+    "description": "Open basic battery protection",
+    "message": "Stop charging at 100 percent after rest",
+    "qna_description": "basic protection charging pause",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "battery_protection",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "protect_battery_basic",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/protect_battery_maximum",
+    "description": "Open maximum battery protection",
+    "message": "Cap charge around eighty percent",
+    "qna_description": "maximum protection 80 percent",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "battery_protection",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "protect_battery_maximum",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/battery_graph",
+    "description": "Open battery usage graph",
+    "message": "Review drain over the last days",
+    "qna_description": "battery graph history",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "battery_usage",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "battery_graph",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/optimize_battery_usage",
+    "description": "Optimize battery usage for an app",
+    "message": "Allow or restrict background activity",
+    "qna_description": "optimize battery usage permission",
+    "domain": "battery",
+    "depth": 3,
+    "parent": "app_power_management",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "optimize_battery_usage",
+      "domain": "battery"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/display",
+    "description": "Open Display settings",
+    "message": "Change brightness theme and screen options",
+    "qna_description": "display parent menu",
+    "domain": "display",
+    "depth": 1,
+    "parent": null,
+    "originalType": "Settings",
+    "classes": {
+      "screen": "display",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/brightness",
+    "description": "Open brightness settings",
+    "message": "Set screen brightness level",
+    "qna_description": "brightness slider too dark too bright",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "brightness",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/adaptive_brightness",
+    "description": "Open adaptive brightness",
+    "message": "Let the phone auto adjust brightness",
+    "qna_description": "auto brightness adaptive",
+    "domain": "display",
+    "depth": 3,
+    "parent": "brightness",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "adaptive_brightness",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/dark_mode",
+    "description": "Open Dark mode",
+    "message": "Switch between light and dark theme",
+    "qna_description": "dark mode night theme",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "dark_mode",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/motion_smoothness",
+    "description": "Open motion smoothness",
+    "message": "Choose standard or adaptive refresh rate",
+    "qna_description": "120hz 60hz motion smoothness",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "motion_smoothness",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/screen_timeout",
+    "description": "Open screen timeout",
+    "message": "Set when the screen turns off",
+    "qna_description": "screen timeout sleep",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "screen_timeout",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/font_size_and_style",
+    "description": "Open font size and style",
+    "message": "Change text size and font",
+    "qna_description": "font size too small large",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "font_size_and_style",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/screen_zoom",
+    "description": "Open screen zoom",
+    "message": "Make items larger or smaller",
+    "qna_description": "screen zoom density",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "screen_zoom",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/navigation_bar",
+    "description": "Open navigation bar settings under Display",
+    "message": "Choose navigation type",
+    "qna_description": "buttons or swipe gestures navigation bar",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "navigation_bar",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/swipe_gestures",
+    "description": "Open swipe gesture navigation",
+    "message": "Use swipe gestures instead of buttons",
+    "qna_description": "full screen gestures swipe from bottom",
+    "domain": "display",
+    "depth": 3,
+    "parent": "navigation_bar",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "swipe_gestures",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/button_navigation",
+    "description": "Open button navigation",
+    "message": "Use three buttons instead of swipes",
+    "qna_description": "navigation buttons recents home back",
+    "domain": "display",
+    "depth": 3,
+    "parent": "navigation_bar",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "button_navigation",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/gesture_hint",
+    "description": "Open gesture hint",
+    "message": "Show guidance lines at the bottom of the screen",
+    "qna_description": "gesture hint bar lines",
+    "domain": "display",
+    "depth": 3,
+    "parent": "navigation_bar",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "gesture_hint",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/button_order",
+    "description": "Open button order",
+    "message": "Swap recents and back button positions",
+    "qna_description": "button order left right",
+    "domain": "display",
+    "depth": 3,
+    "parent": "navigation_bar",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "button_order",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/screen_mode",
+    "description": "Open screen mode",
+    "message": "Choose vivid or natural colors",
+    "qna_description": "vivid natural screen mode",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "screen_mode",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/eye_comfort_shield",
+    "description": "Open Eye comfort shield",
+    "message": "Reduce blue light at night",
+    "qna_description": "blue light filter night comfort",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "eye_comfort_shield",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/always_on_display",
+    "description": "Open Always On Display",
+    "message": "Show clock on a sleeping screen",
+    "qna_description": "aod always on display",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "always_on_display",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/screen_resolution",
+    "description": "Open screen resolution",
+    "message": "Choose FHD or QHD resolution",
+    "qna_description": "wqhd fhd resolution battery",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "screen_resolution",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/accidental_touch_protection",
+    "description": "Open accidental touch protection",
+    "message": "Block touches when in a dark pocket",
+    "qna_description": "pocket touch accidental",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "accidental_touch_protection",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/touch_sensitivity",
+    "description": "Open touch sensitivity",
+    "message": "Improve touches with a screen protector",
+    "qna_description": "touch sensitivity protector",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "touch_sensitivity",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/one_handed_mode",
+    "description": "Open one handed mode",
+    "message": "Shrink the screen for one hand use",
+    "qna_description": "one handed mode",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "one_handed_mode",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/edge_panels",
+    "description": "Open Edge panels",
+    "message": "Handle apps from the screen edge",
+    "qna_description": "edge panel handle",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "edge_panels",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/extra_dim",
+    "description": "Open Extra dim",
+    "message": "Make the screen dimmer than the slider allows",
+    "qna_description": "extra dim flickering night",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "extra_dim",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/screen_protection",
+    "description": "Open screen protector related display options",
+    "message": "Reduce flicker with a protector on",
+    "qna_description": "screen flicker pwm",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "screen_protection",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/screensaver",
+    "description": "Open screensaver",
+    "message": "Show a screensaver while charging",
+    "qna_description": "screensaver dock",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "screensaver",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/lift_to_wake",
+    "description": "Open lift to wake",
+    "message": "Turn the screen on when you pick up the phone",
+    "qna_description": "lift to wake",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "lift_to_wake",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/double_tap_to_wake",
+    "description": "Open double tap to wake or sleep",
+    "message": "Tap the screen to wake it",
+    "qna_description": "double tap wake",
+    "domain": "display",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "double_tap_to_wake",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/navigation_sensitivity",
+    "description": "Open gesture sensitivity",
+    "message": "Adjust how far from the edge a swipe starts",
+    "qna_description": "back gesture sensitivity",
+    "domain": "display",
+    "depth": 3,
+    "parent": "swipe_gestures",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "navigation_sensitivity",
+      "domain": "display"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/camera",
+    "description": "Open Camera app settings",
+    "message": "Change how the camera captures photos",
+    "qna_description": "camera parent menu",
+    "domain": "camera",
+    "depth": 1,
+    "parent": null,
+    "originalType": "Settings",
+    "classes": {
+      "screen": "camera",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/camera_settings",
+    "description": "Open Camera settings",
+    "message": "Configure photo and video options",
+    "qna_description": "camera settings gear",
+    "domain": "camera",
+    "depth": 2,
+    "parent": "camera",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "camera_settings",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/scene_optimizer",
+    "description": "Open scene optimizer",
+    "message": "Automatically enhance scenes",
+    "qna_description": "scene optimizer food sky",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "scene_optimizer",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/auto_hdr",
+    "description": "Open auto HDR",
+    "message": "Capture more detail in bright and dark areas",
+    "qna_description": "hdr auto hdr photos",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "auto_hdr",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/grid_lines",
+    "description": "Open grid lines",
+    "message": "Show composition grid in viewfinder",
+    "qna_description": "camera grid rule of thirds",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "grid_lines",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/location_tags",
+    "description": "Open location tags",
+    "message": "Save location with photos",
+    "qna_description": "geotag location camera",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "location_tags",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/video_stabilization",
+    "description": "Open video stabilization",
+    "message": "Reduce shake in videos",
+    "qna_description": "super steady stabilization",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "video_stabilization",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/advanced_recording",
+    "description": "Open advanced recording options",
+    "message": "Change video resolution and fps",
+    "qna_description": "4k 60fps high efficiency video",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "advanced_recording",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/pro_mode",
+    "description": "Open Pro mode help",
+    "message": "Manually set ISO shutter and focus",
+    "qna_description": "pro camera manual focus",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "pro_mode",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/focus_and_tracking",
+    "description": "Open auto focus tracking",
+    "message": "Track a subject while it moves",
+    "qna_description": "autofocus tracking blur",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "focus_and_tracking",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/shot_suggestions",
+    "description": "Open shot suggestions",
+    "message": "Get composition guides while shooting",
+    "qna_description": "shot suggestions composition",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "shot_suggestions",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/selfie_color_tone",
+    "description": "Open selfie color tone",
+    "message": "Warm or cool selfie processing",
+    "qna_description": "selfie tone yellowish",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "selfie_color_tone",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/wide_angle",
+    "description": "Open wide lens correction",
+    "message": "Correct distortion on ultra wide shots",
+    "qna_description": "ultra wide distortion",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "wide_angle",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/scan_documents_qr",
+    "description": "Open scan QR codes and documents",
+    "message": "Detect QR codes automatically",
+    "qna_description": "scan qr document",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "scan_documents_qr",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/save_options",
+    "description": "Open save options",
+    "message": "Choose HEIF JPEG and copy destination",
+    "qna_description": "heif heic jpeg save",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "save_options",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/shutter_sound",
+    "description": "Open shutter sound",
+    "message": "Mute or keep the shutter click",
+    "qna_description": "camera shutter sound mute",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "shutter_sound",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/watermark",
+    "description": "Open watermarks",
+    "message": "Stamp date or brand on photos",
+    "qna_description": "camera watermark",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "watermark",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/picture_formats",
+    "description": "Open picture formats",
+    "message": "Switch between JPEG and high efficiency",
+    "qna_description": "picture format heif",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "save_options",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "picture_formats",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/auto_lens_switching",
+    "description": "Open auto lens switching",
+    "message": "Stop the camera jumping between lenses",
+    "qna_description": "lens switching zoom jump",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "auto_lens_switching",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/hold_camera_button",
+    "description": "Open hold camera button to",
+    "message": "Choose what a long shutter press does",
+    "qna_description": "hold shutter video",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "hold_camera_button",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/intelligent_optimization",
+    "description": "Open intelligent optimization",
+    "message": "Reduce overprocessed look in photos",
+    "qna_description": "oversharpened processed camera",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "scene_optimizer",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "intelligent_optimization",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/front_video_size",
+    "description": "Open front camera video size",
+    "message": "Change selfie video resolution",
+    "qna_description": "front camera video quality",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "advanced_recording",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "front_video_size",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/restore_camera_defaults",
+    "description": "Reset camera settings",
+    "message": "Restore default camera options",
+    "qna_description": "reset camera settings",
+    "domain": "camera",
+    "depth": 3,
+    "parent": "camera_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "restore_camera_defaults",
+      "domain": "camera"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/device_care",
+    "description": "Open Device care",
+    "message": "Clean battery storage and memory",
+    "qna_description": "device care parent menu",
+    "domain": "performance",
+    "depth": 1,
+    "parent": null,
+    "originalType": "Settings",
+    "classes": {
+      "screen": "device_care",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/memory",
+    "description": "Open memory care",
+    "message": "Free RAM used by background apps",
+    "qna_description": "ram memory cleaning",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "memory",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/storage",
+    "description": "Open storage",
+    "message": "Free space used by files and apps",
+    "qna_description": "storage full clean now",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "storage",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/ram_plus",
+    "description": "Open RAM Plus",
+    "message": "Use storage as extra virtual memory",
+    "qna_description": "ram plus virtual memory lag",
+    "domain": "performance",
+    "depth": 3,
+    "parent": "memory",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "ram_plus",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/auto_optimization",
+    "description": "Open auto optimization",
+    "message": "Restart and optimize on a schedule",
+    "qna_description": "auto optimize restart schedule",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "auto_optimization",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/software_update",
+    "description": "Open software update",
+    "message": "Check for system updates",
+    "qna_description": "software update after update slow",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "software_update",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/app_optimization",
+    "description": "Open app optimization in device care",
+    "message": "Close heavy apps that slow the phone",
+    "qna_description": "optimize apps performance",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "app_optimization",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/processing_speed",
+    "description": "Open processing speed",
+    "message": "Prefer optimized or high performance",
+    "qna_description": "processing speed high performance",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "processing_speed",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/thermal_control",
+    "description": "Open thermal related game and performance options",
+    "message": "Reduce heat throttling during games",
+    "qna_description": "phone hot thermal throttle",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "thermal_control",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/game_booster",
+    "description": "Open Game Booster",
+    "message": "Limit background activity while gaming",
+    "qna_description": "game booster lag fps",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "game_booster",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/developer_options",
+    "description": "Open developer options",
+    "message": "Change animation scales and drawing",
+    "qna_description": "developer options animation scale",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "performance",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "developer_options",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/window_animation_scale",
+    "description": "Open window animation scale",
+    "message": "Speed up or disable window animations",
+    "qna_description": "animation scale 0.5",
+    "domain": "performance",
+    "depth": 3,
+    "parent": "developer_options",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "window_animation_scale",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/transition_animation_scale",
+    "description": "Open transition animation scale",
+    "message": "Speed up screen transitions",
+    "qna_description": "transition animation",
+    "domain": "performance",
+    "depth": 3,
+    "parent": "developer_options",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "transition_animation_scale",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/animator_duration_scale",
+    "description": "Open animator duration scale",
+    "message": "Speed up in-app animations",
+    "qna_description": "animator duration",
+    "domain": "performance",
+    "depth": 3,
+    "parent": "developer_options",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "animator_duration_scale",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/safe_mode_info",
+    "description": "Open recovery and safe mode guidance",
+    "message": "Boot with third party apps disabled",
+    "qna_description": "safe mode boot",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "safe_mode_info",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/reset_settings",
+    "description": "Open reset settings",
+    "message": "Reset app preferences without erasing data",
+    "qna_description": "reset settings preferences",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "reset_settings",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/factory_reset",
+    "description": "Open factory data reset",
+    "message": "Erase all data and restore factory software",
+    "qna_description": "factory reset erase",
+    "domain": "performance",
+    "depth": 3,
+    "parent": "reset_settings",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "factory_reset",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/cache_partition",
+    "description": "Open storage cache cleaning",
+    "message": "Clear cached files that pile up after updates",
+    "qna_description": "clear cache partition",
+    "domain": "performance",
+    "depth": 3,
+    "parent": "storage",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "cache_partition",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/background_check",
+    "description": "Open unused app permissions",
+    "message": "Stop unused apps waking the device",
+    "qna_description": "unused apps pause",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "device_care",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "background_check",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/adaptive_refresh_performance",
+    "description": "Open motion smoothness for performance",
+    "message": "Raise refresh rate for smoother scrolling",
+    "qna_description": "stutter scroll refresh",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "display",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "adaptive_refresh_performance",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/home_screen_light",
+    "description": "Open Home screen settings",
+    "message": "Reduce heavy live wallpapers",
+    "qna_description": "live wallpaper lag",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "performance",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "home_screen_light",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/digital_wellbeing",
+    "description": "Open Digital Wellbeing",
+    "message": "Limit distracting apps that keep waking the phone",
+    "qna_description": "digital wellbeing focus",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "performance",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "digital_wellbeing",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/notifications_asleep",
+    "description": "Open notifications that wake the device",
+    "message": "Reduce wakeups from noisy apps",
+    "qna_description": "notification wake drain",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "performance",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "notifications_asleep",
+      "domain": "performance"
+    }
+  },
+  {
+    "deeplink": "bixby://masked/act/airplane_mode",
+    "description": "Open Airplane mode",
+    "message": "Cut radios when the phone is overheating on standby",
+    "qna_description": "airplane mode radios",
+    "domain": "performance",
+    "depth": 2,
+    "parent": "performance",
+    "originalType": "Settings",
+    "classes": {
+      "screen": "airplane_mode",
+      "domain": "performance"
+    }
+  }
+]

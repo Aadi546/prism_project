@@ -1,0 +1,617 @@
+[
+  {
+    "id": "siis_swipe_axis",
+    "domain": "display",
+    "title": "Swipe navigation moves vertically instead of horizontally",
+    "query_hints": [
+      "phone swipe gestures wrong direction after app install",
+      "swipe navigation scrolls up and down instead of left right",
+      "navigation swipes on samsung respond in the wrong axis"
+    ],
+    "body": "Customers report that after installing an app, swipe navigation moves the screen up and down instead of switching apps left and right.\n\nDo not visit samsung.com/support or any web page. Use on-device Settings.\n\n1. Open Settings.\n2. Tap Display.\n3. Tap Navigation bar.\n4. Select Buttons or Swipe gestures.\n5. If using swipe gestures, turn on Gesture hint so the guidance line appears at the bottom.\n6. Adjust gesture sensitivity if back gestures feel inverted.\n\nIf a recently installed app overlays the navigation area, boot to Safe mode and uninstall it. Restart only after trying settings. Factory reset is last resort.\n",
+    "plan": {
+      "topic": "Swipe Navigation",
+      "kind": "Troubleshooting",
+      "title": "Swipe navigation settings",
+      "actions": [
+        {
+          "actionName": "Configure Navigation Bar Settings",
+          "description": "It will let you choose navigation type",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "navigation_bar",
+              "steps": [
+                "Navigate to and open Settings.",
+                "Tap on Display.",
+                "Tap on Navigation bar.",
+                "Select your preferred navigation type between Buttons and Swipe gestures.",
+                "Optionally toggle on Gesture hint to display guidance lines at the bottom of the screen."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Adjust Gesture Sensitivity",
+          "description": "It will tune edge swipe distance",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "navigation_sensitivity",
+              "steps": [
+                "Stay in Navigation bar settings.",
+                "Tap More options or Swipe gestures.",
+                "Drag sensitivity until back gestures feel natural."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Check Conflicting App Overlay",
+          "description": "It will find apps covering navigation",
+          "category": "manual",
+          "stepGroups": [
+            {
+              "screen_key": "app_optimization",
+              "steps": [
+                "Note any app installed just before the issue started.",
+                "Disable that app or turn off its display overlay permission.",
+                "Test swipe navigation again on the home screen."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Restart In Safe Mode",
+          "description": "It will isolate third party interference",
+          "category": "critical",
+          "stepGroups": [
+            {
+              "screen_key": "safe_mode_info",
+              "steps": [
+                "Press and hold the power key.",
+                "Touch and hold Power off until Safe mode appears.",
+                "Tap Safe mode and test navigation.",
+                "Uninstall the conflicting app if swipes work in Safe mode."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_battery_fast_drain",
+    "domain": "battery",
+    "title": "Battery drains quickly during the day",
+    "query_hints": [
+      "battery dies fast",
+      "my battery drains overnight",
+      "phone battery percentage drops too quickly"
+    ],
+    "body": "Battery drain is usually background apps, high refresh rate, or adaptive battery being off.\n\n1. Open Settings then Battery and device care then Battery.\n2. Open Battery usage and identify the top draining app.\n3. Put unused apps to sleep or deep sleep.\n4. Turn on Adaptive battery.\n5. Switch motion smoothness to Standard to save power.\n6. Enable battery protection if the device stays on a charger.\n\nRestart the phone if usage looks normal but drain continues. Do not factory reset first.\n",
+    "plan": {
+      "topic": "Battery Drain",
+      "kind": "Troubleshooting",
+      "title": "Battery drain settings",
+      "actions": [
+        {
+          "actionName": "Review Battery Usage",
+          "description": "It will show apps wasting power",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "battery_usage",
+              "steps": [
+                "Navigate to and open Settings.",
+                "Tap Battery and device care.",
+                "Tap Battery then Battery usage.",
+                "Note apps using unusual power since last full charge."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Sleep Unused Apps",
+          "description": "It will stop background battery drain",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "put_apps_to_sleep",
+              "steps": [
+                "Open Background usage limits.",
+                "Turn on Put unused apps to sleep.",
+                "Add the draining app to Deep sleeping apps if it should never run."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Enable Adaptive Battery",
+          "description": "It will limit power for idle apps",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "adaptive_battery",
+              "steps": [
+                "Open Battery settings.",
+                "Turn on Adaptive battery.",
+                "Keep the phone unplugged for a few cycles so it can learn usage."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Lower Motion Smoothness",
+          "description": "It will cut refresh related drain",
+          "category": "manual",
+          "stepGroups": [
+            {
+              "screen_key": "motion_smoothness",
+              "steps": [
+                "Open Display settings.",
+                "Tap Motion smoothness.",
+                "Select Standard instead of Adaptive."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Restart The Phone",
+          "description": "It will clear a runaway process",
+          "category": "critical",
+          "stepGroups": [
+            {
+              "screen_key": "auto_optimization",
+              "steps": [
+                "Press and hold the side key.",
+                "Tap Restart.",
+                "Watch battery usage for one hour after reboot."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_screen_flicker",
+    "domain": "display",
+    "title": "Screen flickers at low brightness",
+    "query_hints": [
+      "screen flickers and the battery dies fast",
+      "display flickering at night",
+      "galaxy screen flashes on dim"
+    ],
+    "body": "Flicker at low brightness is often Extra dim, adaptive brightness hunting, or a screen protector increasing touch sensitivity.\n\n1. Open Settings Display.\n2. Turn Extra dim off and raise brightness.\n3. Toggle Adaptive brightness off then on.\n4. Disable Eye comfort shield to test.\n5. If a protector is installed, raise Touch sensitivity.\n\nAvoid factory reset for flicker. Visit a service center only if the panel still flashes at max brightness \u2014 that step is manual and has no deeplink.\n",
+    "plan": {
+      "topic": "Screen Flicker",
+      "kind": "Troubleshooting",
+      "title": "Display flicker settings",
+      "actions": [
+        {
+          "actionName": "Disable Extra Dim",
+          "description": "It will stop aggressive dimming flicker",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "extra_dim",
+              "steps": [
+                "Navigate to and open Settings.",
+                "Tap Display.",
+                "Turn Extra dim off.",
+                "Raise brightness above the lowest two steps."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Reset Adaptive Brightness",
+          "description": "It will stop brightness hunting",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "adaptive_brightness",
+              "steps": [
+                "Open Brightness settings.",
+                "Turn Adaptive brightness off.",
+                "Set a stable brightness then turn Adaptive brightness on again."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Test Eye Comfort Shield",
+          "description": "It will rule out blue light scheduling",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "eye_comfort_shield",
+              "steps": [
+                "Open Eye comfort shield.",
+                "Turn it off and watch the panel for flicker.",
+                "If flicker stops, use a later schedule instead of Adaptive."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Raise Touch Sensitivity",
+          "description": "It will compensate for a screen protector",
+          "category": "manual",
+          "stepGroups": [
+            {
+              "screen_key": "touch_sensitivity",
+              "steps": [
+                "Open Display settings.",
+                "Turn Touch sensitivity on if a protector is installed."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_camera_blur",
+    "domain": "camera",
+    "title": "Photos look blurry or overprocessed after an app install",
+    "query_hints": [
+      "camera got blurry after update",
+      "galaxy photos look smeared",
+      "autofocus hunting and soft pictures"
+    ],
+    "body": "Soft photos are usually dirty glass, scene optimizer overprocessing, or auto lens switching.\n\n1. Wipe the lenses.\n2. Open Camera Settings.\n3. Turn Scene optimizer off to test.\n4. Turn Intelligent optimization to Minimum.\n5. Disable Auto HDR and Auto lens switching.\n6. Reset camera settings if a third party camera overlay changed defaults.\n\nDo not factory reset for blur. Manual cleaning of the lens is required and has no Settings deeplink.\n",
+    "plan": {
+      "topic": "Camera Focus",
+      "kind": "Troubleshooting",
+      "title": "Camera focus settings",
+      "actions": [
+        {
+          "actionName": "Reduce Scene Optimizer",
+          "description": "It will stop overprocessed soft photos",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "scene_optimizer",
+              "steps": [
+                "Open the Camera app.",
+                "Tap the settings gear.",
+                "Turn Scene optimizer off and capture a test photo."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Lower Intelligent Optimization",
+          "description": "It will keep more natural detail",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "intelligent_optimization",
+              "steps": [
+                "Stay in Camera settings.",
+                "Open Intelligent optimization.",
+                "Select Minimum and retake the same scene."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Disable Auto Lens Switching",
+          "description": "It will prevent jump focus blur",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "auto_lens_switching",
+              "steps": [
+                "Open Camera settings.",
+                "Turn Auto lens switching off.",
+                "Pinch zoom slowly and confirm the lens stays put."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Reset Camera Settings",
+          "description": "It will undo overlay changed defaults",
+          "category": "manual",
+          "stepGroups": [
+            {
+              "screen_key": "restore_camera_defaults",
+              "steps": [
+                "Open Camera settings.",
+                "Tap Reset settings.",
+                "Confirm and test autofocus on a high contrast object."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Clean The Lenses",
+          "description": "It will remove smudges causing haze",
+          "category": "manual",
+          "stepGroups": [
+            {
+              "screen_key": null,
+              "steps": [
+                "Wipe the rear lenses with a clean microfiber cloth.",
+                "Avoid paper towels that scratch coatings.",
+                "Retake the same photo in the same light."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_slow_after_update",
+    "domain": "performance",
+    "title": "Phone got slow after a software update",
+    "query_hints": [
+      "my phone got slow after the update",
+      "galaxy laggy after one ui update",
+      "stuttering scrolling after software update"
+    ],
+    "body": "Updates trigger indexing, cache growth, and animation defaults. Device care plus animation scales usually recover smoothness.\n\n1. Open Device care and run Optimization.\n2. Clear cached data in Storage.\n3. Set RAM Plus to 2 GB or off if storage is slow.\n4. In developer options, set animation scales to 0.5x.\n5. Schedule Auto optimization overnight.\n6. Restart. Factory reset only if the device remains unusable after two days of indexing.\n",
+    "plan": {
+      "topic": "System Performance",
+      "kind": "Troubleshooting",
+      "title": "Performance after update",
+      "actions": [
+        {
+          "actionName": "Run Device Care Optimize",
+          "description": "It will free memory and cached files",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "device_care",
+              "steps": [
+                "Navigate to and open Settings.",
+                "Tap Battery and device care.",
+                "Tap Optimize now and wait for the scan to finish."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Clear Cached Files",
+          "description": "It will drop leftover update caches",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "cache_partition",
+              "steps": [
+                "Open Storage in Device care.",
+                "Tap Clean now on cached files.",
+                "Remove large junk files if storage is under ten percent free."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Tune Ram Plus",
+          "description": "It will stop slow virtual memory",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "ram_plus",
+              "steps": [
+                "Open Memory in Device care.",
+                "Tap RAM Plus.",
+                "Choose 2 GB or Off if the phone stutters while swapping."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Reduce Animation Scales",
+          "description": "It will make transitions feel faster",
+          "category": "manual",
+          "stepGroups": [
+            {
+              "screen_key": "window_animation_scale",
+              "steps": [
+                "Enable developer options by tapping Build number seven times.",
+                "Set Window, Transition, and Animator scales to 0.5x."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Restart After Indexing",
+          "description": "It will finish leftover update work",
+          "category": "critical",
+          "stepGroups": [
+            {
+              "screen_key": "auto_optimization",
+              "steps": [
+                "Leave the device plugged in on Wi-Fi for one hour.",
+                "Restart from the power menu.",
+                "If it is still unusable after two days, consider a factory reset as last resort."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_overheat_charge",
+    "domain": "battery",
+    "title": "Phone gets hot while charging overnight",
+    "query_hints": [
+      "phone overheats while charging",
+      "battery hot on wireless charger",
+      "charging very slow and warm"
+    ],
+    "body": "Heat during charge is often fast wireless charging plus a case.\n\n1. Open Charging settings and turn off Fast wireless charging.\n2. Enable Maximum battery protection.\n3. Turn Sleep standby optimization on.\n4. Remove the case while charging.\n",
+    "plan": {
+      "topic": "Charging Heat",
+      "kind": "Troubleshooting",
+      "title": "Charging heat settings",
+      "actions": [
+        {
+          "actionName": "Disable Fast Wireless Charging",
+          "description": "It will lower overnight charge heat",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "wireless_charging",
+              "steps": [
+                "Open Settings Battery Charging settings.",
+                "Turn Fast wireless charging off.",
+                "Use a slower pad overnight."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Enable Maximum Protection",
+          "description": "It will cap overnight charge level",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "protect_battery_maximum",
+              "steps": [
+                "Open Battery protection.",
+                "Select Maximum to keep the charge near eighty percent."
+              ]
+            }
+          ]
+        },
+        {
+          "actionName": "Turn On Sleep Optimization",
+          "description": "It will delay full charge until morning",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "sleep_standby_optimization",
+              "steps": [
+                "Open Battery settings.",
+                "Turn Sleep standby optimization on."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_dark_mode_apps",
+    "domain": "display",
+    "title": "Some apps stay blinding white at night",
+    "query_hints": [
+      "dark mode not applying to apps",
+      "night theme missing in chrome",
+      "want dark mode everywhere"
+    ],
+    "body": "Dark mode is under Display. Third party apps may ignore it unless forced.\n\n1. Settings Display Dark mode.\n2. Turn Dark mode on and set a schedule.\n3. For apps that stay white, use their in-app theme.\n",
+    "plan": {
+      "topic": "Dark Mode",
+      "kind": "Configuration",
+      "title": "Dark mode settings",
+      "actions": [
+        {
+          "actionName": "Schedule Dark Mode",
+          "description": "It will dim the system theme at night",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "dark_mode",
+              "steps": [
+                "Navigate to and open Settings.",
+                "Tap Display then Dark mode.",
+                "Turn Dark mode on and set Sunset to sunrise."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_video_shake",
+    "domain": "camera",
+    "title": "Videos look shaky when walking",
+    "query_hints": [
+      "walking videos are jittery",
+      "need super steady video",
+      "stabilize galaxy video"
+    ],
+    "body": "Enable video stabilization or Super steady. High fps helps.\n\n1. Camera settings Video stabilization on.\n2. Use Super steady for walk-and-talk clips.\n",
+    "plan": {
+      "topic": "Video Shake",
+      "kind": "Configuration",
+      "title": "Video stabilization settings",
+      "actions": [
+        {
+          "actionName": "Enable Video Stabilization",
+          "description": "It will smooth handheld walking video",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "video_stabilization",
+              "steps": [
+                "Open Camera settings.",
+                "Turn Video stabilization on.",
+                "For walking shots, swipe to More and choose Super steady."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_storage_full",
+    "domain": "performance",
+    "title": "Phone storage is full and apps crash",
+    "query_hints": [
+      "storage almost full",
+      "cannot install apps no space",
+      "gallery cannot save photos"
+    ],
+    "body": "Clear cached files and large videos from Storage in Device care before uninstalling apps.\n\n1. Settings Battery and device care Storage.\n2. Clean cached files and trash.\n3. Move photos off device.\n",
+    "plan": {
+      "topic": "Storage Space",
+      "kind": "Troubleshooting",
+      "title": "Storage cleanup settings",
+      "actions": [
+        {
+          "actionName": "Clean Cached Storage",
+          "description": "It will reclaim space from junk files",
+          "category": "auto",
+          "stepGroups": [
+            {
+              "screen_key": "storage",
+              "steps": [
+                "Open Device care then Storage.",
+                "Tap Clean now.",
+                "Delete trash and unused installation files."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "siis_unknown_ir_remote",
+    "domain": "performance",
+    "title": "Television remote app cannot find the IR blaster",
+    "query_hints": [
+      "ir blaster missing on galaxy a series",
+      "universal remote not working",
+      "control tv from phone infrared"
+    ],
+    "body": "This device family does not include an infrared blaster. There is no Settings screen that enables IR. Do not invent steps or service-center URLs.\n",
+    "plan": {
+      "topic": "Infrared Remote",
+      "kind": "Troubleshooting",
+      "title": "Infrared remote missing",
+      "actions": []
+    }
+  }
+]

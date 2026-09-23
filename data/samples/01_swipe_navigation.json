@@ -1,0 +1,136 @@
+{
+  "query": "The mobile phone swipe navigation moves up or down instead of left or right after downloading an app",
+  "query_variations": [
+    "The mobile phone swipe navigation moves up or down instead of left or right after downloading an app",
+    "the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app",
+    "Please advise how to fix this: the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app.",
+    "ugh my the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app this is so annoying",
+    "the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app help",
+    "the dveice dveice siwpe nvaigation nvaigation mvoes worng axis isntead of left or rgiht atfer dwonloading an app",
+    "Device issue: the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app",
+    "why does my device the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app",
+    "Need troubleshooting for the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app",
+    "the device device swipe navigation navigation moves wrong axis instead of left or right after downloading an app after installing an app"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Swipe Navigation Troubleshooting",
+        "title": "Swipe navigation settings",
+        "actions": [
+          {
+            "actionName": "Configure Navigation Bar Settings",
+            "description": "It will let you choose navigation type",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap on Display.",
+                  "Tap on Navigation bar.",
+                  "Select your preferred navigation type between Buttons and Swipe gestures.",
+                  "Optionally toggle on Gesture hint to display guidance lines at the bottom of the screen."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/navigation_bar",
+                  "description": "Open navigation bar settings under Display",
+                  "message": "Choose navigation type",
+                  "classes": {
+                    "screen": "navigation_bar",
+                    "domain": "display"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Adjust Gesture Sensitivity",
+            "description": "It will tune edge swipe distance",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Stay in Navigation bar settings.",
+                  "Tap More options or Swipe gestures.",
+                  "Drag sensitivity until back gestures feel natural."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/navigation_sensitivity",
+                  "description": "Open gesture sensitivity",
+                  "message": "Adjust how far from the edge a swipe starts",
+                  "classes": {
+                    "screen": "navigation_sensitivity",
+                    "domain": "display"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Check Conflicting App Overlay",
+            "description": "It will find apps covering navigation",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Note any app installed just before the issue started.",
+                  "Disable that app or turn off its display overlay permission.",
+                  "Test swipe navigation again on the home screen."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/app_optimization",
+                  "description": "Open app optimization in device care",
+                  "message": "Close heavy apps that slow the phone",
+                  "classes": {
+                    "screen": "app_optimization",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Restart in Safe Mode",
+            "description": "It will isolate third party interference",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Press and hold the power key.",
+                  "Touch and hold Power off until Safe mode appears.",
+                  "Tap Safe mode and test navigation.",
+                  "Uninstall the conflicting app if swipes work in Safe mode."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/safe_mode_info",
+                  "description": "Open recovery and safe mode guidance",
+                  "message": "Boot with third party apps disabled",
+                  "classes": {
+                    "screen": "safe_mode_info",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.9917135834693909
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 1.32,
+    "cache_hit": false,
+    "model": "hybrid-bm25-ngram",
+    "cost_usd": 0.0,
+    "fallback": null
+  }
+}

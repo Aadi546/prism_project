@@ -1,0 +1,159 @@
+{
+  "query": "My battery dies fast even on standby",
+  "query_variations": [
+    "My battery dies fast even on standby",
+    "my battery battery drain even on standby",
+    "Please advise how to fix this: my battery battery drain even on standby.",
+    "ugh my my battery battery drain even on standby this is so annoying",
+    "my battery battery drain even on standby help",
+    "my btatery btatery darin even on satndby",
+    "Device issue: my battery battery drain even on standby",
+    "why does my device my battery battery drain even on standby",
+    "Need troubleshooting for my battery battery drain even on standby",
+    "my battery battery drain even on standby after installing an app"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Battery Drain Troubleshooting",
+        "title": "Battery drain settings",
+        "actions": [
+          {
+            "actionName": "Review Battery Usage",
+            "description": "It will show apps wasting power",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Battery and device care.",
+                  "Tap Battery then Battery usage.",
+                  "Note apps using unusual power since last full charge."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/battery_usage",
+                  "description": "Open battery usage by app",
+                  "message": "See which apps drain the battery",
+                  "classes": {
+                    "screen": "battery_usage",
+                    "domain": "battery"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Sleep Unused Apps",
+            "description": "It will stop background battery drain",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Open Background usage limits.",
+                  "Turn on Put unused apps to sleep.",
+                  "Add the draining app to Deep sleeping apps if it should never run."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/put_apps_to_sleep",
+                  "description": "Put unused apps to sleep",
+                  "message": "Sleep apps that drain battery in background",
+                  "classes": {
+                    "screen": "put_apps_to_sleep",
+                    "domain": "battery"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Enable Adaptive Battery",
+            "description": "It will limit power for idle apps",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Open Battery settings.",
+                  "Turn on Adaptive battery.",
+                  "Keep the phone unplugged for a few cycles so it can learn usage."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/adaptive_battery",
+                  "description": "Open Adaptive battery",
+                  "message": "Limit battery for unused apps",
+                  "classes": {
+                    "screen": "adaptive_battery",
+                    "domain": "battery"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Lower Motion Smoothness",
+            "description": "It will cut refresh related drain",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Open Display settings.",
+                  "Tap Motion smoothness.",
+                  "Select Standard instead of Adaptive."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/motion_smoothness",
+                  "description": "Open motion smoothness",
+                  "message": "Choose standard or adaptive refresh rate",
+                  "classes": {
+                    "screen": "motion_smoothness",
+                    "domain": "display"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Restart the Phone",
+            "description": "It will clear a runaway process",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Press and hold the side key.",
+                  "Tap Restart.",
+                  "Watch battery usage for one hour after reboot."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/auto_optimization",
+                  "description": "Open auto optimization",
+                  "message": "Restart and optimize on a schedule",
+                  "classes": {
+                    "screen": "auto_optimization",
+                    "domain": "performance"
+                  },
+                  "originalType": "Settings"
+                }
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.9916014671325684
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 1.19,
+    "cache_hit": false,
+    "model": "hybrid-bm25-ngram",
+    "cost_usd": 0.0,
+    "fallback": null
+  }
+}
