@@ -4,7 +4,7 @@ Turns vague Galaxy device complaints into schema-valid, one-tap Settings plans w
 
 A customer can say “swipe gestures go the wrong way after I installed an app.” The engine enriches that into a canonical query, retrieves SIIS customer-care text, extracts a `Goal` with ordered actions, maps each action to a **leaf** screen in the deeplink catalog, and serves JSON from `POST /v1/troubleshoot`. Repeat paraphrases hit an in-process semantic cache (no model call, target P95 ≤ 300 ms).
 
-The official ~575-entry Samsung dump was not bundled with the problem PDF. `data/` is a faithful four-domain starter set (Battery, Display, Camera, Performance) using the same schema, so a real `deeplinks.json` / `siis_responses.json` can drop in later.
+`data/` now holds the **official Theme 2 student kit**: 578 masked Settings deeplinks, 20 SIIS articles, `input.txt` queries, and `schema.py`. Plans are derived from that SIIS text and mapped by description — not by guessing URIs.
 
 ## Pipeline
 

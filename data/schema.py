@@ -1,11 +1,8 @@
-"""Exact output contract for the Smart Guided Troubleshooting Engine."""
-
-from __future__ import annotations
-
+"""Response schema for the Smart Guided Troubleshooting Engine hackathon. Validate every response against it."""
 from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Dict, List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class BaseDeeplink(BaseModel):
@@ -32,13 +29,13 @@ class ResultTypes(str, Enum):
     floatNum = "float"
 
 
-class ActionCategory(str, Enum):
+class actionCategory(str, Enum):
     auto = "auto"
     manual = "manual"
     critical = "critical"
 
 
-class ValidationDeeplink(BaseDeeplink):
+class ValidationDeepLink(BaseDeeplink):
     key: str
     resultType: Optional[ResultTypes] = None
     condition: Optional[Condition] = None
@@ -47,7 +44,7 @@ class ValidationDeeplink(BaseDeeplink):
 
 class StepGroup(BaseModel):
     steps: List[str]
-    validationDeeplink: Optional[ValidationDeeplink] = None
+    validationDeeplink: Optional[ValidationDeepLink] = None
     actionableDeeplink: Optional[Deeplink] = None
 
 
@@ -55,37 +52,16 @@ class Action(BaseModel):
     actionName: str
     description: str
     stepGroups: List[StepGroup]
-    category: Optional[ActionCategory] = ActionCategory.manual
+    category: Optional[actionCategory] = actionCategory.manual
 
 
 class Goal(BaseModel):
     goal: str
     title: str
     actions: List[Action]
-    score: float = Field(ge=0.0, le=1.0)
+    score: float
 
 
 class ContextDeeplinkResponse(BaseModel):
     """RAG response containing a list of Goal objects."""
-
     contexts: List[Goal] = []
-
-
-class TroubleshootRequest(BaseModel):
-    query: str
-    siis_response: Optional[Union[str, Dict[str, Any]]] = None
-
-
-class ResponseMeta(BaseModel):
-    latency_ms: float
-    cache_hit: bool
-    model: str
-    cost_usd: float = 0.0
-    fallback: Optional[str] = None
-
-
-class TroubleshootResponse(BaseModel):
-    query: str
-    query_variations: List[str]
-    response: ContextDeeplinkResponse
-    meta: ResponseMeta

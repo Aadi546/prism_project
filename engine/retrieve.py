@@ -109,19 +109,32 @@ def catalog_text(row: dict) -> str:
         row.get("description") or "",
         row.get("message") or "",
         row.get("qna_description") or "",
+        row.get("originalType") or "",
         row.get("domain") or "",
         (row.get("classes") or {}).get("screen") or "",
     ]
     return " ".join(parts)
 
 
+def siis_payload(row: dict) -> dict:
+    raw = row.get("siis_response")
+    if isinstance(raw, dict):
+        return raw
+    return {}
+
+
 def siis_text(row: dict) -> str:
+    payload = siis_payload(row)
     hints = " ".join(row.get("query_hints") or [])
+    content = payload.get("content") or row.get("body") or ""
+    title = payload.get("title") or row.get("title") or ""
+    query = row.get("original_query") or ""
     return " ".join(
         [
-            row.get("title") or "",
+            title,
+            query,
             hints,
-            row.get("body") or "",
+            content,
             row.get("domain") or "",
             (row.get("plan") or {}).get("title") or "",
             (row.get("plan") or {}).get("topic") or "",

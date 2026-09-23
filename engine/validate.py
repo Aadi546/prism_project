@@ -90,11 +90,11 @@ def catalog_uris(catalog: Iterable[dict]) -> set[str]:
 def deeplink_allowed(uri: str, allowed: set[str]) -> bool:
     if not uri:
         return False
+    if uri not in allowed:
+        return False
     if uri == DUMMY_URI:
-        return False
-    if not uri.startswith("bixby://masked/act/"):
-        return False
-    return uri in allowed
+        return True
+    return uri.startswith("bixby://masked/")
 
 
 def sanitize_steps(steps: Sequence[str]) -> list[str]:
@@ -107,8 +107,10 @@ def sanitize_steps(steps: Sequence[str]) -> list[str]:
             cleaned = cleaned[0].upper() + cleaned[1:]
         if not cleaned.endswith("."):
             cleaned += "."
+        if len(cleaned.split()) < 3:
+            continue
         out.append(cleaned)
-    return out or ["Open Settings and review the related screen."]
+    return out
 
 
 def sanitize_deeplink(raw: dict | None, allowed: set[str], catalog_by_uri: dict) -> Deeplink | None:
@@ -155,7 +157,20 @@ def infer_category(name: str, steps: Sequence[str], given: str | None) -> Action
         return ActionCategory(given)
     if any(h in blob for h in CRITICAL_HINTS):
         return ActionCategory.critical
-    if any(h in blob for h in ("clean", "wipe lens", "cloth", "service", "port")):
+    if any(
+        h in blob
+        for h in (
+            "service center",
+            "repair",
+            "walk-in",
+            "mail-in",
+            "contact samsung",
+            "physical damage",
+            "cracked",
+            "usb mouse",
+            "inspect",
+        )
+    ):
         return ActionCategory.manual
     return ActionCategory.auto
 
@@ -172,13 +187,17 @@ def sanitize_action(
             allowed,
             catalog_by_uri,
         )
+        steps_clean = sanitize_steps(group.steps)
         groups.append(
             StepGroup(
-                steps=sanitize_steps(group.steps),
+                steps=steps_clean,
                 validationDeeplink=group.validationDeeplink,
                 actionableDeeplink=deeplink,
             )
         )
+    groups = [g for g in groups if g.steps]
+    if not groups:
+        groups = [StepGroup(steps=["Review the matching steps from the reference text."])]
     cat = action.category or ActionCategory.manual
     # Auto actions should carry a catalog deeplink when one exists
     if cat == ActionCategory.auto and groups and groups[0].actionableDeeplink is None:
