@@ -9,3 +9,4 @@ pytest>=8.3
 python-multipart>=0.0.20
 # optional Groq LLM path (OpenAI-compatible client); engine runs without it
 openai>=1.40
+python-dotenv>=1.0

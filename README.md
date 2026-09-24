@@ -48,7 +48,10 @@ cd web && npm install && npm run dev
 
 ### Optional: Groq LLM path
 
+Copy `.env.example` to `.env` and set `GROQ_API_KEY`. The engine loads that file automatically.
+
 ```bash
+# or export instead of `.env`
 export GROQ_API_KEY=...        # PowerShell: $env:GROQ_API_KEY="..."
 export GROQ_MODEL=llama-3.3-70b-versatile   # or llama-3.1-8b-instant
 ```
