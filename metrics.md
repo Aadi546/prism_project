@@ -1,9 +1,9 @@
 # System Performance Metrics & Evaluation Report
 
-**Model(s):** deterministic-hybrid-v2 — Groq LLM path available with `GROQ_API_KEY`, not used for this run
+**Model(s):** groq/llama-3.3-70b-versatile (Groq `llama-3.3-70b-versatile` for extraction/paraphrases)
 **Embeddings:** TF-IDF word 1–2 grams (catalog & SIIS retrieval), char 3–5 grams (semantic cache)
-**Environment:** 12 vCPU / Windows 11 / Python 3.13.4
-**Generated:** 2026-09-24 20:04 by `python eval/run_metrics.py` — scorer is independent of the engine's own validators
+**Environment:** 4 vCPU / Windows 11 / Python 3.12.4
+**Generated:** 2026-09-24 22:35 by `python eval/run_metrics.py` — scorer is independent of the engine's own validators
 
 Before = the original v1 engine in this repo, measured by the same script on the same data.
 
@@ -39,9 +39,9 @@ Step accuracy = completeness (share of required actions present) + correctness (
 
 | Execution Path | Target (P95) | N | P50 (ms) | P95 (ms) | Before P95 (ms) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Cache hit - exact query match | <= 300 ms | 36 | 0.91 | 1.31 | 0.08 |
-| Cache hit - unseen semantic paraphrase | <= 300 ms | 57 | 2.91 | 4.36 | 0.0 |
-| Cold query - full pipeline extraction & mapping | <= 8000 ms | 40 | 8.31 | 31.32 | 95.56 |
+| Cache hit - exact query match | <= 300 ms | 36 | 4.37 | 6.72 | 0.08 |
+| Cache hit - unseen semantic paraphrase | <= 300 ms | 57 | 9.84 | 15.99 | 0.0 |
+| Cold query - full pipeline extraction & mapping | <= 8000 ms | 40 | 225.83 | 462.75 | 95.56 |
 
 ---
 
@@ -62,10 +62,9 @@ Step accuracy = completeness (share of required actions present) + correctness (
 | Architecture Variant | Step Accuracy | Deeplink Relevance | Latency (P95 cold) | Cost / Query | Key Observations |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Baseline: v1 engine (hashed n-grams, no relevance gate) | 2.74 | 0.03 | 95.56 ms | $0 | Wrong screens for generic steps, 3-word truncated titles |
-| Hybrid: verbatim setting name, then TF-IDF over descriptions (default) | 2.99 | 2.0 | 31.32 ms | $0.0000 | auto actions with link 100.0%, verifiable 68.0% |
-| Pure rules: verbatim setting names only | 2.99 | 2.0 | 103.76 ms | $0.0000 | auto actions with link 100.0%, verifiable 68.0% |
-| Pure TF-IDF retrieval over descriptions | 2.99 | 1.67 | 36.23 ms | $0.0000 | auto actions with link 100.0%, verifiable 65.2% |
-| Groq LLM extraction (llama-3.3-70b) | set GROQ_API_KEY and re-run | | | tracked | Drafts grounded + re-validated; falls back on any error |
+| Hybrid: verbatim setting name, then TF-IDF over descriptions (default) | 2.99 | 2.0 | 462.75 ms | $0.0000 | auto actions with link 100.0%, verifiable 68.0% |
+| Pure rules: verbatim setting names only | 2.99 | 2.0 | 700.76 ms | $0.0000 | auto actions with link 100.0%, verifiable 68.0% |
+| Pure TF-IDF retrieval over descriptions | 2.99 | 1.67 | 738.62 ms | $0.0000 | auto actions with link 100.0%, verifiable 65.2% |
 
 ---
 

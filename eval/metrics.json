@@ -1,9 +1,9 @@
 {
   "label": "after (v2)",
-  "generated": "2026-09-24 20:04",
-  "model": "deterministic-hybrid-v2",
-  "llm_model": null,
-  "environment": "12 vCPU / Windows 11 / Python 3.13.4",
+  "generated": "2026-09-24 22:35",
+  "model": "groq/llama-3.3-70b-versatile",
+  "llm_model": "llama-3.3-70b-versatile",
+  "environment": "4 vCPU / Windows 11 / Python 3.12.4",
   "compliance": {
     "responses": 40,
     "goals": 42,
@@ -286,18 +286,18 @@
   "latency": {
     "exact": {
       "n": 36,
-      "p50": 0.91,
-      "p95": 1.31
+      "p50": 4.37,
+      "p95": 6.72
     },
     "paraphrase": {
       "n": 57,
-      "p50": 2.91,
-      "p95": 4.36
+      "p50": 9.84,
+      "p95": 15.99
     },
     "cold": {
       "n": 40,
-      "p50": 8.31,
-      "p95": 31.32
+      "p50": 225.83,
+      "p95": 462.75
     }
   },
   "cost": {
@@ -388,7 +388,7 @@
       "variant": "Hybrid: verbatim setting name, then TF-IDF over descriptions (default)",
       "step": 2.99,
       "links": 2.0,
-      "p95": 31.32,
+      "p95": 462.75,
       "cost": 0.0,
       "note": "auto actions with link 100.0%, verifiable 68.0%"
     },
@@ -396,7 +396,7 @@
       "variant": "Pure rules: verbatim setting names only",
       "step": 2.99,
       "links": 2.0,
-      "p95": 103.76,
+      "p95": 700.76,
       "cost": 0.0,
       "note": "auto actions with link 100.0%, verifiable 68.0%"
     },
@@ -404,7 +404,7 @@
       "variant": "Pure TF-IDF retrieval over descriptions",
       "step": 2.99,
       "links": 1.67,
-      "p95": 36.23,
+      "p95": 738.62,
       "cost": 0.0,
       "note": "auto actions with link 100.0%, verifiable 65.2%"
     }
