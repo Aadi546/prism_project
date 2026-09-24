@@ -779,6 +779,10 @@ GOLD = [
 
 
 def main() -> None:
+    raise SystemExit(
+        "Legacy synthetic-data generator. data/ now holds the official Theme 2 kit; "
+        "running this would overwrite it. Kept only for history."
+    )
     DATA.mkdir(parents=True, exist_ok=True)
     SAMPLES.mkdir(parents=True, exist_ok=True)
     (DATA / "deeplinks.json").write_text(json.dumps(DEEPLINKS, indent=2) + "\n")

@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "engine",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "uvicorn", "app:app", "--host", "127.0.0.1", "--port", "8766"],
+      "port": 8766
+    },
+    {
+      "name": "web",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["web/node_modules/next/dist/bin/next", "dev", "web", "--webpack", "--port", "43124"],
+      "port": 43124,
+      "env": { "ENGINE_URL": "http://127.0.0.1:8766" }
+    }
+  ]
+}

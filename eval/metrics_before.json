@@ -1,0 +1,398 @@
+{
+  "label": "before (v1)",
+  "generated": "2026-09-24 19:49",
+  "model": "hybrid-bm25-ngram (v1)",
+  "llm_model": null,
+  "environment": "12 vCPU / Windows 11 / Python 3.13.4",
+  "compliance": {
+    "responses": 40,
+    "goals": 40,
+    "schema_valid_pct": 100.0,
+    "rule_compliance_pct": 5.0,
+    "url_leaks": 0,
+    "catalog_validity_pct": 100.0,
+    "auto_with_link_pct": 100.0,
+    "verifiable_validation_pct": 0.0,
+    "empty_contexts": 0
+  },
+  "accuracy": {
+    "step_accuracy": 2.74,
+    "deeplink_relevance": 0.03,
+    "rows": [
+      {
+        "id": "row_1",
+        "title": "Email server not",
+        "step": 2.75,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.75,
+        "links": 0.0,
+        "link_detail": [
+          {
+            "pattern": "tap wi-?fi",
+            "score": 0.0
+          }
+        ],
+        "score": 0.9996817111968994
+      },
+      {
+        "id": "row_2",
+        "title": "Blank or black",
+        "step": 2.667,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.667,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9996705055236816
+      },
+      {
+        "id": "row_3",
+        "title": "Some things to",
+        "step": 2.75,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.75,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9997490644454956
+      },
+      {
+        "id": "row_4",
+        "title": "Blank or black",
+        "step": 2.667,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.667,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9996705055236816
+      },
+      {
+        "id": "row_5",
+        "title": "Transfer secure folder",
+        "step": 2.5,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.5,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9985415935516357
+      },
+      {
+        "id": "row_7",
+        "title": "Use multi window",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 0.0,
+        "link_detail": [
+          {
+            "pattern": "swipe for split screen",
+            "score": 0.0
+          },
+          {
+            "pattern": "swipe for pop-up",
+            "score": 0.0
+          }
+        ],
+        "score": 0.9999651908874512
+      },
+      {
+        "id": "row_8",
+        "title": "Screen mirroring to",
+        "step": 2.5,
+        "completeness": 0.5,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 0.0,
+        "link_detail": [
+          {
+            "pattern": "screen timeout",
+            "score": 0.0
+          }
+        ],
+        "score": 0.9999587535858154
+      },
+      {
+        "id": "row_9",
+        "title": "Access your galaxy",
+        "step": 2.5,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.5,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9996511936187744
+      },
+      {
+        "id": "row_10",
+        "title": "Screen flickers when",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9986410140991211
+      },
+      {
+        "id": "row_11",
+        "title": "Some things to",
+        "step": 2.75,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.75,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9997490644454956
+      },
+      {
+        "id": "row_12",
+        "title": "Use multi window",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 0.0,
+        "link_detail": [
+          {
+            "pattern": "swipe for split screen",
+            "score": 0.0
+          },
+          {
+            "pattern": "swipe for pop-up",
+            "score": 0.0
+          }
+        ],
+        "score": 0.9999651908874512
+      },
+      {
+        "id": "row_13",
+        "title": "Blank or black",
+        "step": 2.667,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.667,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9996705055236816
+      },
+      {
+        "id": "row_14",
+        "title": "Cracked or bleeding",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 0.0,
+        "link_detail": [
+          {
+            "pattern": "back up data",
+            "score": 0.0
+          }
+        ],
+        "score": 0.999517560005188
+      },
+      {
+        "id": "row_15",
+        "title": "Blank or black",
+        "step": 2.667,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.667,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9996705055236816
+      },
+      {
+        "id": "row_16",
+        "title": "Blank or black",
+        "step": 2.667,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.667,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9996705055236816
+      },
+      {
+        "id": "row_17",
+        "title": "Some things to",
+        "step": 2.75,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.75,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9997490644454956
+      },
+      {
+        "id": "row_19",
+        "title": "Cracked or bleeding",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 0.0,
+        "link_detail": [
+          {
+            "pattern": "back up data",
+            "score": 0.0
+          }
+        ],
+        "score": 0.999517560005188
+      },
+      {
+        "id": "row_20",
+        "title": "Screen does not",
+        "step": 2.833,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.833,
+        "links": 0.0,
+        "link_detail": [
+          {
+            "pattern": "back up data",
+            "score": 0.0
+          }
+        ],
+        "score": 0.999820351600647
+      },
+      {
+        "id": "row_21",
+        "title": "Touchscreen issues on",
+        "step": 2.464,
+        "completeness": 0.714,
+        "grounded": 1.0,
+        "ordering": 0.75,
+        "links": 0.25,
+        "link_detail": [
+          {
+            "pattern": "switch next to touch sensitivity\\.$",
+            "score": 0.0
+          },
+          {
+            "pattern": "to disable it|turn off this feature",
+            "score": 1.0
+          },
+          {
+            "pattern": "tap navigation bar",
+            "score": 0.0
+          },
+          {
+            "pattern": "back up data",
+            "score": 0.0
+          }
+        ],
+        "score": 0.9999299645423889
+      },
+      {
+        "id": "row_22",
+        "title": "Blank or black",
+        "step": 2.667,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 0.667,
+        "links": null,
+        "link_detail": [],
+        "score": 0.9996705055236816
+      }
+    ]
+  },
+  "latency": {
+    "exact": {
+      "n": 40,
+      "p50": 0.06,
+      "p95": 0.08
+    },
+    "paraphrase": {
+      "n": 0,
+      "p50": 0.0,
+      "p95": 0.0
+    },
+    "cold": {
+      "n": 40,
+      "p50": 49.07,
+      "p95": 95.56
+    }
+  },
+  "cost": {
+    "cold_avg_usd": 0.0,
+    "hit_usd": 0.0
+  },
+  "cache": {
+    "paraphrases": 60,
+    "hit_pct": 0.0,
+    "wrong_hit_pct": 0.0,
+    "miss_pct": 100.0
+  },
+  "closed_loop": {
+    "available": false
+  },
+  "samples": {
+    "retrieval_titles": [
+      [
+        "Email server not"
+      ],
+      [
+        "Blank or black"
+      ],
+      [
+        "Some things to"
+      ],
+      [
+        "Blank or black"
+      ],
+      [
+        "Transfer secure folder"
+      ],
+      [
+        "Use multi window"
+      ],
+      [
+        "Screen mirroring to"
+      ],
+      [
+        "Access your galaxy"
+      ],
+      [
+        "Screen flickers when"
+      ],
+      [
+        "Some things to"
+      ],
+      [
+        "Use multi window"
+      ],
+      [
+        "Blank or black"
+      ],
+      [
+        "Cracked or bleeding"
+      ],
+      [
+        "Blank or black"
+      ],
+      [
+        "Blank or black"
+      ],
+      [
+        "Some things to"
+      ],
+      [
+        "Cracked or bleeding"
+      ],
+      [
+        "Screen does not"
+      ],
+      [
+        "Touchscreen issues on"
+      ],
+      [
+        "Blank or black"
+      ]
+    ]
+  }
+}

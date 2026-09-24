@@ -1,496 +1,458 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  Check,
-  Copy,
-  Hand,
-  Loader2,
-  Phone,
-  ShieldAlert,
-  Sparkles,
-  TriangleAlert,
-} from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Check, Copy, Download, FastForward, Loader2, RotateCcw, Sparkles, TriangleAlert } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { PhoneSimulator, type PhoneScreen, type SettingRow } from "@/components/phone-simulator";
+import { PlanView, groupKey } from "@/components/plan-view";
+import { TraceView } from "@/components/trace-view";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import type { ExampleQuery, TroubleshootResponse } from "@/lib/types";
+import { getSiis, simStart, simTap, simVerify, troubleshoot } from "@/lib/api";
+import type { ExampleQuery, SiisArticle, TroubleshootResponse, VerifyResult } from "@/lib/types";
 
-const FALLBACK_EXAMPLES: ExampleQuery[] = [
+type Tab = "plan" | "trace" | "json";
+
+const EXTRA_EXAMPLES: ExampleQuery[] = [
   {
-    id: "kit_cracked",
-    domain: "screen",
-    text: "My Galaxy phone's screen is completely cracked, it's a total crack and I can't use the device.",
+    id: "multi",
+    domain: "compound",
+    text: '1. "My Galaxy Z Flip 7 screen is cracked again right where it folds." 2. "The touch doesn\'t work on certain parts of the screen." 3. "I can hardly see anything on the display."',
   },
-  {
-    id: "kit_black",
-    domain: "screen",
-    text: "My Galaxy S24 Ultra screen is completely black and won't turn on, even though the phone powers on.",
-  },
-  {
-    id: "kit_touch",
-    domain: "touch",
-    text: "My Galaxy S22 screen inputs are delayed and the touch responsiveness is laggy.",
-  },
-  {
-    id: "kit_float",
-    domain: "display",
-    text: "My Galaxy S25 has a floating circle that constantly hovers on my screen.",
-  },
+  { id: "para", domain: "paraphrase", text: "s22 touch input delay laggy screen" },
+  { id: "unknown", domain: "no match", text: "My phone's infrared blaster no longer controls my AC remote app" },
 ];
 
-function shortLabel(text: string) {
-  const clean = text.replace(/^\d+\.\s*/, "").replace(/^"+|"+$/g, "");
-  return clean.length > 92 ? `${clean.slice(0, 90)}…` : clean;
+function short(text: string, n = 78) {
+  const t = text.replace(/^\d+\.\s*/, "").replace(/^"+|"+$/g, "");
+  return t.length > n ? `${t.slice(0, n - 1)}…` : t;
 }
 
-function categoryMeta(cat?: string) {
-  if (cat === "critical") {
-    return {
-      label: "Last resort",
-      hint: "Only after the earlier steps",
-      icon: ShieldAlert,
-      className: "bg-destructive/10 text-destructive border-destructive/20",
-    };
-  }
-  if (cat === "manual") {
-    return {
-      label: "By hand",
-      hint: "Repair desk, cable, or looking at the phone",
-      icon: Hand,
-      className: "border-border bg-secondary text-secondary-foreground",
-    };
-  }
-  return {
-    label: "On the phone",
-    hint: "Settings you can tap yourself",
-    icon: Phone,
-    className: "bg-primary text-primary-foreground border-transparent",
-  };
+function kindOf(originalType?: string | null, uri?: string): PhoneScreen["kind"] {
+  if (uri?.endsWith("dummy_positive")) return "dummy";
+  if (originalType === "onURL") return "on";
+  if (originalType === "offURL") return "off";
+  if (originalType === "updateURL") return "update";
+  return "open";
 }
 
 export function TroubleshootingConsole() {
   const [query, setQuery] = useState("");
-  const [siis, setSiis] = useState("");
-  const [showSiis, setShowSiis] = useState(false);
-  const [examples, setExamples] = useState<ExampleQuery[]>(FALLBACK_EXAMPLES);
+  const [articles, setArticles] = useState<SiisArticle[]>([]);
+  const [siisMode, setSiisMode] = useState<string>("none");
+  const [customSiis, setCustomSiis] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<TroubleshootResponse | null>(null);
-  const [copied, setCopied] = useState<string | null>(null);
-  const [engineOk, setEngineOk] = useState<boolean | null>(null);
+  const [tab, setTab] = useState<Tab>("plan");
+  const [copied, setCopied] = useState(false);
+
+  const [session, setSession] = useState<string | null>(null);
+  const [simState, setSimState] = useState<Record<string, string>>({});
+  const [simLabels, setSimLabels] = useState<Record<string, string>>({});
+  const [screen, setScreen] = useState<PhoneScreen | null>(null);
+  const [verify, setVerify] = useState<Record<string, VerifyResult>>({});
+  const [lastVerify, setLastVerify] = useState<VerifyResult | null>(null);
+  const [running, setRunning] = useState<string | null>(null);
+  const [criticalUnlocked, setCriticalUnlocked] = useState(false);
+  const autopilot = useRef(false);
 
   useEffect(() => {
-    fetch("/health")
-      .then((r) => r.json())
-      .then((b) => setEngineOk(b.status === "ok"))
-      .catch(() => setEngineOk(false));
-    fetch("/v1/examples")
-      .then((r) => r.json())
-      .then((b) => {
-        if (Array.isArray(b.queries) && b.queries.length) {
-          const keys = [
-            /cracked/i,
-            /completely black/i,
-            /floating circle/i,
-            /laggy/i,
-            /flickers and goes blank/i,
-          ];
-          const picked: ExampleQuery[] = [];
-          for (const key of keys) {
-            const hit = b.queries.find(
-              (q: ExampleQuery) => key.test(q.text) && !picked.some((p) => p.id === q.id)
-            );
-            if (hit) picked.push(hit);
-          }
-          setExamples(picked.length ? picked : b.queries.slice(0, 4));
-        }
-      })
+    getSiis()
+      .then(setArticles)
       .catch(() => undefined);
   }, []);
 
-  async function submit(nextQuery = query) {
-    const q = nextQuery.trim();
-    if (!q) {
-      setError("Type what is going wrong with the phone, then tap Get checklist.");
+  const examples = useMemo(() => {
+    const seen = new Set<string>();
+    const picks = articles.filter((a) => {
+      if (seen.has(a.title)) return false;
+      seen.add(a.title);
+      return true;
+    });
+    return picks;
+  }, [articles]);
+
+  const goals = useMemo(() => result?.response.contexts ?? [], [result]);
+
+
+  const loadSim = useCallback(async (res: TroubleshootResponse) => {
+    setScreen(null);
+    setVerify({});
+    setLastVerify(null);
+    setCriticalUnlocked(false);
+    if (!res.response.contexts.length) {
+      setSession(null);
+      setSimState({});
+      setSimLabels({});
       return;
     }
-    setQuery(q);
+    try {
+      const snap = await simStart(res.response);
+      setSession(snap.id);
+      setSimState(snap.state);
+      setSimLabels(snap.labels);
+    } catch {
+      setSession(null);
+    }
+  }, []);
+
+  async function submit(q = query, siisOverride?: unknown) {
+    const text = q.trim();
+    if (!text) {
+      setError("Describe what the phone is doing first.");
+      return;
+    }
+    setQuery(text);
     setLoading(true);
     setError(null);
+    let siis: unknown = siisOverride ?? null;
+    if (siisOverride === undefined) {
+      if (siisMode === "custom") siis = customSiis.trim() || null;
+      else if (siisMode !== "none") siis = articles.find((a) => a.id === siisMode)?.siis_response ?? null;
+    }
     try {
-      const res = await fetch("/v1/troubleshoot", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          query: q,
-          siis_response: siis.trim() || null,
-        }),
-      });
-      if (!res.ok) {
-        throw new Error("The helper could not build a plan. Try again in a moment.");
-      }
-      const body = (await res.json()) as TroubleshootResponse;
-      setResult(body);
+      const res = await troubleshoot(text, siis);
+      setResult(res);
+      setTab("plan");
+      await loadSim(res);
     } catch {
       setResult(null);
-      setError("Could not reach the helper. Check that it is running, then try again.");
+      setError("The engine did not answer. Start it with: python -m uvicorn app:app --port 8765");
     } finally {
       setLoading(false);
     }
   }
 
-  async function copyText(value: string) {
+  async function runGroup(c: number, a: number, g: number) {
+    if (!session || !result) return;
+    const group = result.response.contexts[c]?.actions[a]?.stepGroups[g];
+    const link = group?.actionableDeeplink;
+    if (!group || !link) return;
+    const key = groupKey(c, a, g);
+    setRunning(key);
+    setLastVerify(null);
     try {
-      await navigator.clipboard.writeText(value);
-      setCopied(value);
-      setTimeout(() => setCopied(null), 1500);
-    } catch {
-      setError("Could not copy. Select the text instead.");
+      const val = group.validationDeeplink;
+      const tapped = await simTap(session, link.deeplink, val);
+      const kind = kindOf(link.originalType, link.deeplink);
+      const row = tapped.row;
+      setScreen({
+        title: row?.message ?? link.message ?? "Settings",
+        description: row?.description ?? link.description,
+        detail: row?.qna_description ?? null,
+        uri: link.deeplink,
+        kind,
+        settingKey: val?.key ?? row?.key ?? null,
+        value: val ? tapped.state[val.deeplink] : null,
+      });
+      setSimState(tapped.state);
+      if (val) {
+        await new Promise((r) => setTimeout(r, 450));
+        const v = await simVerify(session, val);
+        setVerify((m) => ({ ...m, [key]: v }));
+        setLastVerify(v);
+      } else {
+        const v: VerifyResult = {
+          deeplink: link.deeplink,
+          key: link.message ?? "screen",
+          observed: null,
+          expected: null,
+          condition: null,
+          resultType: null,
+          verifiable: false,
+          passed: true,
+        };
+        setVerify((m) => ({ ...m, [key]: v }));
+        setLastVerify(v);
+      }
+    } finally {
+      setRunning(null);
     }
   }
 
-  const goal = result?.response.contexts[0];
-  const emptyReason = useMemo(() => {
-    if (!result || goal) return null;
-    if (result.meta.fallback === "no_siis_context") {
-      return "This helper only knows the sample screen problems in the kit (black display, cracks, laggy touch, and similar). Try one of the example problems, or paste a help article under Advanced.";
+  const autoGroups = useMemo(() => {
+    const out: [number, number, number][] = [];
+    goals.forEach((goal, c) =>
+      goal.actions.forEach((act, a) => {
+        if (act.category !== "auto") return;
+        act.stepGroups.forEach((g, gi) => g.actionableDeeplink && out.push([c, a, gi]));
+      }),
+    );
+    return out;
+  }, [goals]);
+
+  async function runAll() {
+    autopilot.current = true;
+    for (const [c, a, g] of autoGroups) {
+      if (!autopilot.current) break;
+      await runGroup(c, a, g);
+      await new Promise((r) => setTimeout(r, 700));
     }
-    if (result.meta.fallback === "no_match") {
-      return "The help article has no safe on-phone fix. The helper left the plan empty on purpose instead of making steps up.";
-    }
-    return "No checklist could be built for that description.";
-  }, [result, goal]);
+    autopilot.current = false;
+  }
+
+  const verifiedCount = Object.values(verify).filter((v) => v.verifiable && v.passed).length;
+  const verifiableTotal = goals.flatMap((g) => g.actions).filter((a) => a.category === "auto").flatMap((a) => a.stepGroups).filter((g) => g.validationDeeplink?.resultType).length;
+
+  const settings: SettingRow[] = Object.keys(simState).map((uri) => ({
+    uri,
+    label: simLabels[uri] ?? uri,
+    value: simState[uri],
+  }));
+
+  const contractJson = useMemo(() => {
+    if (!result) return "";
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { trace, ...contract } = result;
+    return JSON.stringify(contract, null, 2);
+  }, [result]);
+
+  const emptyReason =
+    result && !goals.length
+      ? result.meta.fallback === "no_siis_context"
+        ? "No knowledge-base article covers this complaint, so the engine returned an empty plan (fallback: no_siis_context) instead of inventing steps."
+        : "The reference text has no viable fix for this complaint, so the plan is empty on purpose (fallback: no_match)."
+      : null;
 
   return (
-    <div className="relative min-h-full overflow-x-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(1200px_280px_at_20%_-10%,oklch(0.82_0.08_255/0.35),transparent_70%)]"
-      />
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 pb-28 sm:px-6 sm:pb-10 lg:px-8">
-        <header className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl space-y-3">
-            <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase">
-              Galaxy care helper
-            </p>
-            <h1 className="font-heading text-4xl leading-[1.1] font-semibold tracking-tight text-pretty sm:text-5xl">
-              Say the problem.
-              <span className="text-primary"> Get a checklist.</span>
-            </h1>
-            <p className="text-base leading-7 text-muted-foreground">
-              Type what the phone is doing in everyday words. You will get
-              ordered steps to try on the Galaxy. Links under a step are demo
-              Settings IDs — they will not open the screen on a real phone.
-            </p>
-          </div>
-          <div className="flex items-center gap-2 self-start rounded-full border border-border bg-card px-3 py-1.5 text-sm shadow-sm">
-            <span
-              className={`size-2 rounded-full ${engineOk ? "bg-emerald-600" : engineOk === false ? "bg-destructive" : "bg-muted-foreground"}`}
-            />
-            {engineOk === null
-              ? "Starting…"
-              : engineOk
-                ? "Ready"
-                : "Helper offline"}
-          </div>
-        </header>
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
+      <header className="flex max-w-3xl flex-col gap-2">
+        <h1 className="font-heading text-3xl leading-tight font-semibold tracking-tight text-pretty sm:text-4xl">
+          Vague complaint in. <span className="text-primary">Verified one-tap plan out.</span>
+        </h1>
+        <p className="text-sm leading-6 text-muted-foreground sm:text-base">
+          The engine reads the Samsung knowledge-base article, keeps only steps it can point to in the text, maps each
+          Settings step to the exact catalog screen, orders safe → physical → disruptive, and then proves the fix on a
+          simulated device by reading the validation deeplink back.
+        </p>
+      </header>
 
-        <ol className="grid gap-3 sm:grid-cols-3">
-          {[
-            ["1", "Describe it", "Black screen, crack, laggy touch — however they said it."],
-            ["2", "Read the plan", "Safer Settings steps first. Repair or restart last."],
-            ["3", "Do it on the phone", "Follow the list. Ignore the bixby:// codes unless you are testing."],
-          ].map(([n, t, d]) => (
-            <li
-              key={n}
-              className="flex gap-3 rounded-2xl border border-border bg-card/80 px-4 py-3"
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[340px_minmax(0,1fr)_320px]">
+        {/* input */}
+        <section className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 lg:col-span-2 xl:sticky xl:top-20 xl:col-span-1">
+          <label className="text-sm font-medium" htmlFor="query">
+            Customer complaint
+          </label>
+          <Textarea
+            id="query"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submit();
+            }}
+            placeholder="My Galaxy screen went black but the phone still rings…"
+            className="min-h-28 bg-background text-sm"
+          />
+          <div className="flex flex-col gap-1.5">
+            <label className="text-sm font-medium" htmlFor="siis">
+              SIIS reference text
+            </label>
+            <select
+              id="siis"
+              value={siisMode}
+              onChange={(e) => setSiisMode(e.target.value)}
+              className="h-9 rounded-lg border border-input bg-background px-2 text-sm"
             >
-              <span className="font-heading text-2xl text-primary">{n}</span>
-              <span>
-                <span className="block font-medium">{t}</span>
-                <span className="text-sm leading-5 text-muted-foreground">{d}</span>
-              </span>
-            </li>
-          ))}
-        </ol>
-
-        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.18fr)]">
-          <Card className="lg:sticky lg:top-4">
-            <CardHeader>
-              <CardTitle className="font-heading text-2xl">What’s going wrong?</CardTitle>
-              <CardDescription>
-                Write it like a customer would. Examples below fill this box for you.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-              <label className="text-sm font-medium" htmlFor="query">
-                The problem
-              </label>
+              <option value="none">None — engine retrieves / uses cache</option>
+              {articles.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.id}: {short(a.title, 48)}
+                </option>
+              ))}
+              <option value="custom">Paste my own…</option>
+            </select>
+            {siisMode === "custom" ? (
               <Textarea
-                id="query"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="My Galaxy screen went black but the phone still rings…"
-                className="min-h-32 bg-background text-base"
+                value={customSiis}
+                onChange={(e) => setCustomSiis(e.target.value)}
+                placeholder="Paste a customer-care article…"
+                className="min-h-28 bg-background font-mono text-xs"
               />
-
+            ) : null}
+          </div>
+          <Button size="lg" onClick={() => submit()} disabled={loading}>
+            {loading ? <Loader2 className="animate-spin" /> : <Sparkles />}
+            Build plan
+          </Button>
+          {error ? (
+            <p className="flex items-start gap-2 text-sm text-destructive">
+              <TriangleAlert className="mt-0.5 size-4 shrink-0" /> {error}
+            </p>
+          ) : null}
+          <div className="flex max-h-72 flex-col gap-1.5 overflow-auto pr-1 xl:max-h-none xl:overflow-visible">
+            <span className="text-xs font-medium text-muted-foreground">Kit complaints (with their SIIS article)</span>
+            {examples.map((a) => (
               <button
+                key={a.id}
                 type="button"
-                className="text-left text-sm text-primary underline-offset-4 hover:underline"
-                onClick={() => setShowSiis((v) => !v)}
+                onClick={() => {
+                  setSiisMode(a.id);
+                  submit(a.query, a.siis_response);
+                }}
+                className="rounded-lg border border-border px-2.5 py-1.5 text-left text-xs leading-5 hover:bg-muted"
               >
-                {showSiis ? "Hide extra help article" : "I have a help article to paste (optional)"}
+                {short(a.query)}
               </button>
-              {showSiis ? (
-                <div className="space-y-2">
-                  <label className="text-sm font-medium" htmlFor="siis">
-                    Help article
-                  </label>
-                  <Textarea
-                    id="siis"
-                    value={siis}
-                    onChange={(e) => setSiis(e.target.value)}
-                    placeholder="Paste support notes if you have them. Leave blank otherwise."
-                    className="min-h-24 bg-background"
-                  />
-                </div>
-              ) : null}
+            ))}
+            <span className="mt-2 text-xs font-medium text-muted-foreground">Edge cases (no SIIS)</span>
+            {EXTRA_EXAMPLES.map((e) => (
+              <button
+                key={e.id}
+                type="button"
+                onClick={() => {
+                  setSiisMode("none");
+                  submit(e.text, null);
+                }}
+                className="rounded-lg border border-dashed border-border px-2.5 py-1.5 text-left text-xs leading-5 hover:bg-muted"
+              >
+                <span className="mr-1 font-medium">{e.domain}:</span>
+                {short(e.text, 70)}
+              </button>
+            ))}
+          </div>
+        </section>
 
-              <div className="hidden flex-wrap gap-2 sm:flex">
-                <Button onClick={() => submit()} disabled={loading} size="lg">
-                  {loading ? (
-                    <>
-                      <Loader2 className="animate-spin" />
-                      Building checklist
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles />
-                      Get checklist
-                    </>
-                  )}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  disabled={loading}
-                  onClick={() => {
-                    setQuery("");
-                    setSiis("");
-                    setResult(null);
-                    setError(null);
-                  }}
-                >
-                  Clear
-                </Button>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                  Try a sample
-                </p>
-                <div className="flex flex-col gap-2">
-                  {examples.map((ex) => (
+        {/* result */}
+        <section className="flex min-h-[28rem] min-w-0 flex-col gap-4">
+          {result ? (
+            <>
+              <div className="flex flex-wrap items-center gap-2 text-xs">
+                <span className={`rounded-full px-2.5 py-1 ${result.meta.cache_hit ? "bg-ok-soft text-ok" : "bg-muted"}`}>
+                  {result.meta.cache_hit ? "Cache hit" : "Cold pipeline"}
+                </span>
+                <span className="rounded-full bg-muted px-2.5 py-1 font-mono tabular-nums">{result.meta.latency_ms} ms</span>
+                <span className="rounded-full bg-muted px-2.5 py-1 font-mono">${result.meta.cost_usd.toFixed(4)}</span>
+                <span className="rounded-full bg-muted px-2.5 py-1">{result.meta.model}</span>
+                {result.meta.fallback ? (
+                  <span className="rounded-full bg-bad-soft px-2.5 py-1 text-destructive">fallback: {result.meta.fallback}</span>
+                ) : null}
+                <div className="ml-auto flex rounded-lg border border-border p-0.5">
+                  {(["plan", "trace", "json"] as Tab[]).map((t) => (
                     <button
-                      key={ex.id}
+                      key={t}
                       type="button"
-                      className="rounded-xl border border-border bg-background px-3 py-2.5 text-left text-sm leading-5 hover:border-primary/40 hover:bg-muted"
-                      onClick={() => submit(ex.text)}
+                      onClick={() => setTab(t)}
+                      className={`rounded-md px-2.5 py-1 capitalize ${tab === t ? "bg-secondary font-medium" : "text-muted-foreground"}`}
                     >
-                      {shortLabel(ex.text)}
+                      {t === "json" ? "JSON" : t}
                     </button>
                   ))}
                 </div>
               </div>
-              {error ? (
-                <p className="text-sm text-destructive" role="alert">
-                  {error}
-                </p>
+
+              {tab === "plan" ? (
+                emptyReason ? (
+                  <div className="rounded-xl border border-dashed border-border p-6 text-sm leading-6 text-muted-foreground">
+                    <p className="mb-2 font-medium text-foreground">Empty plan — by design</p>
+                    {emptyReason}
+                  </div>
+                ) : (
+                  <PlanView
+                    goals={goals}
+                    verify={verify}
+                    running={running}
+                    criticalUnlocked={criticalUnlocked}
+                    onRun={runGroup}
+                    onUnlock={() => setCriticalUnlocked(true)}
+                    canRun={!!session}
+                  />
+                )
               ) : null}
-            </CardContent>
-          </Card>
+              {tab === "trace" ? (
+                result.trace ? (
+                  <TraceView trace={result.trace} goals={goals} variations={result.query_variations} />
+                ) : (
+                  <p className="text-sm text-muted-foreground">No trace for this response.</p>
+                )
+              ) : null}
+              {tab === "json" ? (
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={async () => {
+                        await navigator.clipboard.writeText(contractJson);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 1400);
+                      }}
+                    >
+                      {copied ? <Check /> : <Copy />} Copy
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        const blob = new Blob([contractJson], { type: "application/json" });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = "troubleshoot_response.json";
+                        a.click();
+                        URL.revokeObjectURL(url);
+                      }}
+                    >
+                      <Download /> Download
+                    </Button>
+                    <span className="self-center text-xs text-muted-foreground">Exactly what POST /v1/troubleshoot returns (trace excluded)</span>
+                  </div>
+                  <pre className="max-h-[40rem] overflow-auto rounded-xl border border-border bg-muted/40 p-3 text-xs leading-5">
+                    {contractJson}
+                  </pre>
+                </div>
+              ) : null}
+            </>
+          ) : (
+            <div className="flex flex-1 flex-col items-center justify-center rounded-xl border border-dashed border-border p-10 text-center">
+              <p className="font-heading text-xl">Pick a kit complaint or type one</p>
+              <p className="mt-2 max-w-md text-sm text-muted-foreground">
+                You will get the plan, a trace showing where every step came from, and a phone you can tap through to
+                watch each fix get confirmed.
+              </p>
+            </div>
+          )}
+        </section>
 
-          <div className="flex min-h-[28rem] flex-col gap-4">
-            {!result && !loading ? (
-              <Card className="flex flex-1 items-center justify-center border-dashed py-16">
-                <CardContent className="max-w-md text-center">
-                  <Sparkles className="mx-auto mb-3 text-primary" />
-                  <CardTitle className="font-heading mb-2 text-2xl">
-                    Your checklist will show here
-                  </CardTitle>
-                  <CardDescription className="text-base leading-6">
-                    Tap a sample on the left, or type a screen problem and press
-                    Get checklist.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ) : null}
-
-            {loading ? (
-              <Card>
-                <CardContent className="flex items-center gap-3 py-10 text-muted-foreground">
-                  <Loader2 className="size-5 animate-spin text-primary" />
-                  Matching the problem to a help article and Settings screens…
-                </CardContent>
-              </Card>
-            ) : null}
-
-            {result && !loading ? (
-              <>
-                {emptyReason ? (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="font-heading flex items-center gap-2 text-2xl">
-                        <TriangleAlert className="size-5 text-accent-foreground" />
-                        No checklist this time
-                      </CardTitle>
-                      <CardDescription className="text-base leading-6">
-                        {emptyReason}
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
-                ) : null}
-
-                {goal ? (
-                  <Card>
-                    <CardHeader className="gap-2">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant="secondary">
-                          {result.meta.cache_hit ? "Instant (seen before)" : "Fresh lookup"}
-                        </Badge>
-                        <Badge variant="outline">
-                          {Math.round(result.meta.latency_ms)} ms
-                        </Badge>
-                      </div>
-                      <CardTitle className="font-heading text-3xl leading-tight">
-                        {goal.title}
-                      </CardTitle>
-                      <CardDescription className="text-base">
-                        {goal.goal}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-5">
-                      {goal.actions.map((action, idx) => {
-                        const meta = categoryMeta(action.category);
-                        const Icon = meta.icon;
-                        return (
-                          <article
-                            key={`${action.actionName}-${idx}`}
-                            className="rounded-2xl border border-border bg-background/70 p-4"
-                          >
-                            <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-                              <div>
-                                <p className="text-xs font-medium text-muted-foreground">
-                                  Step {idx + 1}
-                                </p>
-                                <h3 className="font-heading text-xl leading-snug">
-                                  {action.actionName}
-                                </h3>
-                              </div>
-                              <span
-                                className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-medium ${meta.className}`}
-                              >
-                                <Icon className="size-3.5" />
-                                {meta.label}
-                              </span>
-                            </div>
-                            <p className="mb-3 text-sm text-muted-foreground">
-                              {action.description}
-                            </p>
-                            {action.stepGroups.map((group, gi) => (
-                              <div key={gi} className="space-y-3">
-                                <ol className="space-y-2">
-                                  {group.steps.map((step, si) => (
-                                    <li
-                                      key={`${si}-${step.slice(0, 24)}`}
-                                      className="flex gap-3 text-sm leading-6"
-                                    >
-                                      <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
-                                        {si + 1}
-                                      </span>
-                                      <span>{step}</span>
-                                    </li>
-                                  ))}
-                                </ol>
-                                {group.actionableDeeplink ? (
-                                  <div className="rounded-xl border border-dashed border-primary/25 bg-card px-3 py-3">
-                                    <p className="text-xs font-semibold tracking-wide text-primary uppercase">
-                                      Settings screen (demo ID)
-                                    </p>
-                                    <p className="text-sm">
-                                      {group.actionableDeeplink.message ||
-                                        group.actionableDeeplink.description}
-                                    </p>
-                                    <p className="mt-1 font-mono text-[11px] break-all text-muted-foreground">
-                                      {group.actionableDeeplink.deeplink}
-                                    </p>
-                                    <p className="mt-1 text-xs text-muted-foreground">
-                                      This code is a stand-in. It will not open Settings
-                                      on a Galaxy. Follow the numbered taps above.
-                                    </p>
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="mt-2"
-                                      onClick={() =>
-                                        copyText(group.actionableDeeplink!.deeplink)
-                                      }
-                                    >
-                                      {copied === group.actionableDeeplink.deeplink ? (
-                                        <Check />
-                                      ) : (
-                                        <Copy />
-                                      )}
-                                      Copy ID
-                                    </Button>
-                                  </div>
-                                ) : (
-                                  <p className="text-xs text-muted-foreground">
-                                    {meta.hint}. No Settings shortcut for this part.
-                                  </p>
-                                )}
-                              </div>
-                            ))}
-                          </article>
-                        );
-                      })}
-                    </CardContent>
-                  </Card>
-                ) : null}
-              </>
-            ) : null}
+        {/* phone */}
+        <aside className="flex flex-col gap-3 lg:sticky lg:top-20">
+          <PhoneSimulator
+            screen={screen}
+            settings={settings}
+            verify={lastVerify}
+            busy={running !== null && !lastVerify}
+            onBack={() => setScreen(null)}
+            sessionId={session}
+          />
+          <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3 text-xs">
+            <div className="flex items-center justify-between">
+              <span className="font-medium">Closed-loop check</span>
+              <span className="font-mono tabular-nums">
+                {verifiedCount}/{verifiableTotal} verified
+              </span>
+            </div>
+            <div className="flex gap-2">
+              <Button size="sm" className="flex-1" disabled={!session || !autoGroups.length || running !== null} onClick={runAll}>
+                <FastForward /> Run safe steps
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                disabled={!result}
+                onClick={() => {
+                  autopilot.current = false;
+                  if (result) loadSim(result);
+                }}
+              >
+                <RotateCcw /> Reset
+              </Button>
+            </div>
+            <p className="leading-4 text-muted-foreground">
+              Each tap opens the target screen, flips the switch, then re-reads the <span className="font-mono">val/</span>{" "}
+              URI against resultType / condition / value.
+            </p>
           </div>
-        </div>
-      </div>
-
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t border-border bg-card/95 p-3 backdrop-blur sm:hidden">
-        <div className="flex gap-2">
-          <Button className="flex-1" size="lg" disabled={loading} onClick={() => submit()}>
-            {loading ? "Building…" : "Get checklist"}
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            disabled={loading}
-            onClick={() => {
-              setQuery("");
-              setSiis("");
-              setResult(null);
-              setError(null);
-            }}
-          >
-            Clear
-          </Button>
-        </div>
+        </aside>
       </div>
     </div>
   );

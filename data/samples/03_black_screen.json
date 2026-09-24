@@ -1,0 +1,104 @@
+{
+  "request": {
+    "query": "My Galaxy S24 Ultra screen is completely black and won't turn on, even though the phone powers on, rings, and otherwise works; there is no physical damage.",
+    "siis_response": {
+      "title": "Blank or black display on a Samsung phone or tablet",
+      "content": "Smartphone,Others Mobile,Tablet,Mobile Accessories Blank or black display on a Samsung phone or tablet ( Smartphone,Others Mobile,Tablet,Mobile Accessories): ## Troubleshooting Steps for Device Not Turning On\nI understand you're having trouble with your device not turning on. Let's go through some troubleshooting steps together to see if we can resolve this.\n### Step 1: Check for Physical Damage and Liquid Exposure\nFirst, please carefully inspect your phone or tablet, charger, and USB cable for any physical damage or signs of liquid exposure.\nPlease remove any cases or accessories that might be covering the charging port or buttons. Examine the USB connections for any corrosion or bent pins. The USB connection should feel secure with minimal movement. Next, let's check the Liquid Damage Indicator (LDI). The LDI should normally appear solid white, or white with pink or purple X's. Here's how to check the LDI:\nTurn off your phone or tablet. Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray. Shine a flashlight into the SIM/MicroSD slot.\nIf the device has been exposed to moisture, the LDI will appear solid pink, purple, or red. If this is the case, your device will require service. If the device has not been exposed to moisture, the LDI will be solid white or solid white with pink or purple Xs. Normal LDIs\nAn LDI exposed to liquid\n### Step 2: Force a Restart\nIf there's no physical or liquid damage, let's try to force a restart on your device. There are two methods for this:\nPress and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.\nIf your device has a removable battery, please remove the battery for 60 seconds, and then reinsert it.\n### Step 3: Charge the Device\nNow, please connect your phone or tablet to its appropriate charger and let it charge for at least 1 hour. It's important to note that the battery charging indicator might take up to 10 minutes to appear on the display.\n### Step 4: Attempt to Power On\nAfter charging, please disconnect the phone or tablet from the charger. Then, try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds. You should see the Samsung Galaxy logo appear if it powers on successfully.\nIf the screen turns on, it indicates that your device needed a charge. Please turn off your device and reconnect it to the appropriate charger until it is fully charged. If the screen still fails to turn on after completing all these steps, your device may require service. In this case, please contact the Samsung Support Center for further assistance."
+    }
+  },
+  "query": "My Galaxy S24 Ultra screen is completely black and won't turn on, even though the phone powers on, rings, and otherwise works; there is no physical damage.",
+  "query_variations": [
+    "My Galaxy S24 Ultra screen is completely black and won't turn on, even though the phone powers on, rings, and otherwise works; there is no physical damage.",
+    "My Galaxy S24 Ultra has an issue where the screen stays black. How can I resolve this?",
+    "hey, the screen stays black on my S24 Ultra — any fix?",
+    "S24 Ultra screen blank turn though powers rings",
+    "This is so annoying, the screen stays black again on my S24 Ultra!",
+    "my S24 Ultra screen stays black",
+    "Why does my S24 Ultra keep acting up? The screen stays black.",
+    "Support request: screen stays black on Galaxy S24 Ultra. Please send troubleshooting steps.",
+    "screen stays black fix S24 Ultra",
+    "What should I do when the screen stays black?"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Blank Screen Troubleshooting",
+        "title": "Blank screen display",
+        "actions": [
+          {
+            "actionName": "Check for Physical Damage and Liquid Exposure",
+            "description": "It will reveal physical or liquid damage",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Remove any cases or accessories that might be covering the charging port or buttons.",
+                  "Examine the USB connections for any corrosion or bent pins.",
+                  "Turn off your phone or tablet.",
+                  "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+                  "Shine a flashlight into the SIM/MicroSD slot."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Charge the Device",
+            "description": "It will restore enough battery power",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Connect your phone or tablet to its appropriate charger and let it charge for at least 1 hour."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Attempt to Power on",
+            "description": "It will confirm the device starts",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Disconnect the phone or tablet from the charger.",
+                  "Try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
+                  "Turn off your device and reconnect it to the appropriate charger until it is fully charged.",
+                  "In this case, please contact the Samsung Support Center for further assistance."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Force a Restart",
+            "description": "It will reboot an unresponsive device",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+                  "If your device has a removable battery, please remove the battery for 60 seconds, and then reinsert it."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.82
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 9.04,
+    "cache_hit": false,
+    "model": "deterministic-hybrid-v2",
+    "cost_usd": 0.0,
+    "fallback": null
+  }
+}

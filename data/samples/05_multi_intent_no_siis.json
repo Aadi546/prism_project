@@ -1,0 +1,222 @@
+{
+  "request": {
+    "query": "1. \"My Galaxy Z Flip 7 screen is cracked again right where it folds.\"\n2. \"The touch doesn't work on certain parts of the screen.\"\n3. \"I can hardly see anything on the display.\"",
+    "siis_response": null
+  },
+  "query": "1. \"My Galaxy Z Flip 7 screen is cracked again right where it folds.\"\n2. \"The touch doesn't work on certain parts of the screen.\"\n3. \"I can hardly see anything on the display.\"",
+  "query_variations": [
+    "My Galaxy Z Flip 7 screen is cracked again right where it folds. 2. The touch doesn't work on certain parts of the screen. 3. I can hardly see anything on the display.",
+    "My Galaxy Z Flip 7 has an issue where the screen is cracked. How can I resolve this?",
+    "hey, the screen is cracked on my Z Flip 7 — any fix?",
+    "Z Flip 7 screen cracked again right where folds",
+    "This is so annoying, the screen is cracked again on my Z Flip 7!",
+    "my Z Flip 7 screen is crakced",
+    "Why does my Z Flip 7 keep acting up? The screen is cracked.",
+    "Support request: screen is cracked on Galaxy Z Flip 7. Please send troubleshooting steps.",
+    "screen is cracked fix Z Flip 7",
+    "What should I do when the screen is cracked and the touchscreen is laggy and unresponsive?"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Screen Damage Troubleshooting",
+        "title": "Cracked screen repair",
+        "actions": [
+          {
+            "actionName": "Back Up Phone Data",
+            "description": "It will keep your data safe",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Accounts and backup.",
+                  "Select Back up data to secure your personal files."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "bixby://masked/val/266037d0c5",
+                  "key": "Back up data (Samsung Cloud)",
+                  "resultType": "boolean",
+                  "condition": "equal",
+                  "value": "True"
+                },
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/b3ed3ed663",
+                  "description": "Enables data backup to Samsung Cloud via device Settings on the device.",
+                  "message": "Enable Back up data (Samsung Cloud)",
+                  "classes": null,
+                  "originalType": "onURL"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Schedule a Screen Repair",
+            "description": "It will get the screen professionally repaired",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Schedule a walk-in or mail-in repair to fix your cracked screen using Samsung genuine parts.",
+                  "Visit Samsung Repair Services for more information."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          }
+        ],
+        "score": 0.7
+      },
+      {
+        "goal": "Follow these steps to perform this Touchscreen Troubleshooting",
+        "title": "Touchscreen responsiveness",
+        "actions": [
+          {
+            "actionName": "Back Up Phone Data",
+            "description": "It will keep your data safe",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Accounts and backup.",
+                  "Select Back up data to secure your personal files."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "bixby://masked/val/266037d0c5",
+                  "key": "Back up data (Samsung Cloud)",
+                  "resultType": "boolean",
+                  "condition": "equal",
+                  "value": "True"
+                },
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/b3ed3ed663",
+                  "description": "Enables data backup to Samsung Cloud via device Settings on the device.",
+                  "message": "Enable Back up data (Samsung Cloud)",
+                  "classes": null,
+                  "originalType": "onURL"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Back Up Data with a Mouse",
+            "description": "It will keep your data safe",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Connect the adapter to your phone.",
+                  "Connect the mouse's USB to the adapter.",
+                  "Connect a keyboard the same way, so you are able to easily enter your PIN or Password.",
+                  "Once you've backed up your data, please visit a Samsung walk-in service center, or you can schedule a repair service online."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Back Up Data via HDMI",
+            "description": "It will keep your data safe",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If your phone's screen is damaged and you can no longer see anything on it, you can back up your data by connecting it to your TV or monitor.",
+                  "With some devices, you can also use a device like a DeX station or multi-port adapter to connect a mouse and keyboard in addition to HDMI.",
+                  "Connect the adapter to your phone.",
+                  "Connect the HDMI cable to the adapter.",
+                  "Connect the other end of the HDMI cable to the HDMI port on the TV or monitor.",
+                  "Once you've backed up your data, please visit a Samsung walk-in service center, or you can schedule a repair service online."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          }
+        ],
+        "score": 0.61
+      },
+      {
+        "goal": "Follow these steps to perform this Blank Screen Troubleshooting",
+        "title": "Blank screen display",
+        "actions": [
+          {
+            "actionName": "Check for Physical Damage and Liquid Exposure",
+            "description": "It will reveal physical or liquid damage",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Remove any cases or accessories that might be covering the charging port or buttons.",
+                  "Examine the USB connections for any corrosion or bent pins.",
+                  "Turn off your phone or tablet.",
+                  "Insert the ejector tool into the small hole next to the SIM/MicroSD tray to eject the tray.",
+                  "Shine a flashlight into the SIM/MicroSD slot."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Charge the Device",
+            "description": "It will restore enough battery power",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Connect your phone or tablet to its appropriate charger and let it charge for at least 1 hour."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Attempt to Power on",
+            "description": "It will confirm the device starts",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Disconnect the phone or tablet from the charger.",
+                  "Try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
+                  "Turn off your device and reconnect it to the appropriate charger until it is fully charged.",
+                  "In this case, please contact the Samsung Support Center for further assistance."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Force a Restart",
+            "description": "It will reboot an unresponsive device",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Press and hold both the Power button (or Side button) and the Volume down button simultaneously for at least 20 seconds.",
+                  "If your device has a removable battery, please remove the battery for 60 seconds, and then reinsert it."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.77
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 17.66,
+    "cache_hit": false,
+    "model": "deterministic-hybrid-v2",
+    "cost_usd": 0.0,
+    "fallback": null
+  }
+}

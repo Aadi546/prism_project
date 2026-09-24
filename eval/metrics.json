@@ -1,0 +1,412 @@
+{
+  "label": "after (v2)",
+  "generated": "2026-09-24 20:04",
+  "model": "deterministic-hybrid-v2",
+  "llm_model": null,
+  "environment": "12 vCPU / Windows 11 / Python 3.13.4",
+  "compliance": {
+    "responses": 40,
+    "goals": 42,
+    "schema_valid_pct": 100.0,
+    "rule_compliance_pct": 100.0,
+    "url_leaks": 0,
+    "catalog_validity_pct": 100.0,
+    "auto_with_link_pct": 100.0,
+    "verifiable_validation_pct": 68.0,
+    "empty_contexts": 0
+  },
+  "accuracy": {
+    "step_accuracy": 2.99,
+    "deeplink_relevance": 2.0,
+    "rows": [
+      {
+        "id": "row_1",
+        "title": "Screen flicker issue",
+        "step": 2.833,
+        "completeness": 0.833,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 2.0,
+        "link_detail": [
+          {
+            "pattern": "tap wi-?fi",
+            "score": 2.0
+          }
+        ],
+        "score": 0.72
+      },
+      {
+        "id": "row_2",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.7
+      },
+      {
+        "id": "row_3",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.74
+      },
+      {
+        "id": "row_4",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.75
+      },
+      {
+        "id": "row_5",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.8
+      },
+      {
+        "id": "row_7",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.59
+      },
+      {
+        "id": "row_8",
+        "title": "Screen size display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 2.0,
+        "link_detail": [
+          {
+            "pattern": "screen timeout",
+            "score": 2.0
+          }
+        ],
+        "score": 0.74
+      },
+      {
+        "id": "row_9",
+        "title": "Touchscreen responsiveness",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.68
+      },
+      {
+        "id": "row_10",
+        "title": "Screen flicker issue",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.72
+      },
+      {
+        "id": "row_11",
+        "title": "Partial screen blackout",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.75
+      },
+      {
+        "id": "row_12",
+        "title": "Floating button settings",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.85
+      },
+      {
+        "id": "row_13",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.67
+      },
+      {
+        "id": "row_14",
+        "title": "Cracked screen repair",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 2.0,
+        "link_detail": [
+          {
+            "pattern": "back up data",
+            "score": 2.0
+          }
+        ],
+        "score": 0.77
+      },
+      {
+        "id": "row_15",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.76
+      },
+      {
+        "id": "row_16",
+        "title": "Screen flicker issue",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.44
+      },
+      {
+        "id": "row_17",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.71
+      },
+      {
+        "id": "row_19",
+        "title": "Cracked screen repair",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 2.0,
+        "link_detail": [
+          {
+            "pattern": "back up data",
+            "score": 2.0
+          }
+        ],
+        "score": 0.66
+      },
+      {
+        "id": "row_20",
+        "title": "Screen display distortion",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 2.0,
+        "link_detail": [
+          {
+            "pattern": "back up data",
+            "score": 2.0
+          }
+        ],
+        "score": 0.72
+      },
+      {
+        "id": "row_21",
+        "title": "Touchscreen responsiveness",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": 2.0,
+        "link_detail": [
+          {
+            "pattern": "switch next to touch sensitivity\\.$",
+            "score": 2.0
+          },
+          {
+            "pattern": "to disable it|turn off this feature",
+            "score": 2.0
+          },
+          {
+            "pattern": "tap navigation bar",
+            "score": 2.0
+          },
+          {
+            "pattern": "back up data",
+            "score": 2.0
+          }
+        ],
+        "score": 0.64
+      },
+      {
+        "id": "row_22",
+        "title": "Blank screen display",
+        "step": 3.0,
+        "completeness": 1.0,
+        "grounded": 1.0,
+        "ordering": 1.0,
+        "links": null,
+        "link_detail": [],
+        "score": 0.82
+      }
+    ]
+  },
+  "latency": {
+    "exact": {
+      "n": 36,
+      "p50": 0.91,
+      "p95": 1.31
+    },
+    "paraphrase": {
+      "n": 57,
+      "p50": 2.91,
+      "p95": 4.36
+    },
+    "cold": {
+      "n": 40,
+      "p50": 8.31,
+      "p95": 31.32
+    }
+  },
+  "cost": {
+    "cold_avg_usd": 0.0,
+    "hit_usd": 0.0
+  },
+  "cache": {
+    "paraphrases": 60,
+    "hit_pct": 90.0,
+    "wrong_hit_pct": 5.0,
+    "miss_pct": 5.0
+  },
+  "closed_loop": {
+    "available": true,
+    "plans": 20,
+    "verified_taps": 8,
+    "fixed_and_confirmed": 7,
+    "plans_with_verifiable_fix": 6
+  },
+  "samples": {
+    "retrieval_titles": [
+      [
+        "Screen flicker issue"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Screen size display"
+      ],
+      [
+        "Touchscreen responsiveness"
+      ],
+      [
+        "Screen flicker issue"
+      ],
+      [
+        "Partial screen blackout"
+      ],
+      [
+        "Floating button settings"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Cracked screen repair"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Screen flicker issue"
+      ],
+      [
+        "Blank screen display"
+      ],
+      [
+        "Cracked screen repair",
+        "Touchscreen responsiveness",
+        "Blank screen display"
+      ],
+      [
+        "Screen display distortion"
+      ],
+      [
+        "Touchscreen responsiveness"
+      ],
+      [
+        "Blank screen display"
+      ]
+    ]
+  },
+  "ablation": [
+    {
+      "variant": "Hybrid: verbatim setting name, then TF-IDF over descriptions (default)",
+      "step": 2.99,
+      "links": 2.0,
+      "p95": 31.32,
+      "cost": 0.0,
+      "note": "auto actions with link 100.0%, verifiable 68.0%"
+    },
+    {
+      "variant": "Pure rules: verbatim setting names only",
+      "step": 2.99,
+      "links": 2.0,
+      "p95": 103.76,
+      "cost": 0.0,
+      "note": "auto actions with link 100.0%, verifiable 68.0%"
+    },
+    {
+      "variant": "Pure TF-IDF retrieval over descriptions",
+      "step": 2.99,
+      "links": 1.67,
+      "p95": 36.23,
+      "cost": 0.0,
+      "note": "auto actions with link 100.0%, verifiable 65.2%"
+    }
+  ]
+}

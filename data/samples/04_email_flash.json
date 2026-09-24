@@ -1,0 +1,187 @@
+{
+  "request": {
+    "query": "1. My Samsung A115G tablet screen flashes and then goes completely blank whenever I tap to open an email in Gmail, and after it works for a short time it goes blank again.",
+    "siis_response": {
+      "title": "Email server not responding on Samsung phone or tablet",
+      "content": "Smartphone,Others Mobile,Mobile Accessories,Tablet Email server not responding on Samsung phone or tablet ( Smartphone,Others Mobile,Mobile Accessories,Tablet): # Troubleshooting Email Connection Issues on Your Samsung Phone\nIf you're having trouble accessing your email on your Samsung phone, here are some steps you can take to resolve the issue.\n## Step 1: Check Email Access on a PC\nFirst, try accessing your email on a personal computer. This helps determine if the problem is with your phone's connection or your email account itself. If you can sign in and access your email on a PC, your phone might not be connected to Wi-Fi or mobile data.\n## Step 2: Verify Your Phone's Internet Connection\nEnsure your phone is connected to a stable Wi-Fi or mobile data network.\nSwipe down from the top of your phone's screen to open the Quick settings panel.\nTouch and hold the Wi-Fi icon to check your connection status.\nAlternatively, go to Settings, tap Connections, and then tap Wi-Fi. To confirm your internet connection is working, try loading a webpage or performing a quick search.\n## Step 3: Review Your Email Account Settings\nSometimes, changes made by your email provider on their server can cause connection problems. In such cases, you may need to remove and re-add your email account to your phone to apply the new configuration.\nYou can find instructions on how to remove your account and add it again at the provided links.\nBefore proceeding, make sure you have your email account's username and password readily available.\nRemember that passwords are case-sensitive. Entering the password incorrectly will prevent your phone from connecting to your email server.\n## Step 4: Clear the Email App's Cache and Data\nClearing the cache and data for your email app can resolve temporary glitches.\nTo clear the app's cache:\nNavigate to Settings.\nTap Apps.\nSelect your email app.\nTap Storage.\nTap Clear cache.\nTo clear the app's data:\nNavigate to Settings.\nTap Apps.\nSelect your email app.\nTap Storage.\nTap Clear data, and then tap OK.\nClearing the app's data will reset it to its original settings, effectively wiping it clean.\n## Step 5: Restart Your Phone in Safe Mode\nUsing Safe mode helps identify if a third-party app, including your email app, is causing conflicts with your phone's performance.\nPress and hold the Power button or Side button.\nIf your phone doesn't have a dedicated Power button, swipe down from the top of the screen to open Quick settings, and then tap the Power icon.\nTouch and hold the Power off icon.\nTap Safe mode when it appears on the screen.\nYour phone will restart, and \"Safe mode\" will be displayed in the bottom left corner of the screen. While in Safe mode, check if your email app is still experiencing issues. If the problem is resolved, it indicates that another app might be causing the conflict. You can also uninstall the email app if necessary while in Safe mode.\nTo exit Safe mode, simply restart your phone normally.\n## Step 6: Contact Your Email Service Provider\nIf you have followed all the above steps and are still experiencing difficulties with your email connection, it is recommended to contact your email service provider directly for further assistance."
+    }
+  },
+  "query": "1. My Samsung A115G tablet screen flashes and then goes completely blank whenever I tap to open an email in Gmail, and after it works for a short time it goes blank again.",
+  "query_variations": [
+    "My Samsung A115G tablet screen flashes and then goes completely blank whenever I tap to open an email in Gmail, and after it works for a short time it goes blank again.",
+    "My Galaxy A115G has an issue where the screen flickers. How can I resolve this?",
+    "hey, the screen flickers on my A115G — any fix?",
+    "A115G screen flicker goes blank whenever tap",
+    "This is so annoying, the screen flickers again on my A115G!",
+    "my A115G screen flicekrs",
+    "Why does my A115G keep acting up? The screen flickers.",
+    "Support request: screen flickers on Galaxy A115G. Please send troubleshooting steps.",
+    "screen flickers fix A115G",
+    "What should I do when the screen flickers and the screen stays black?"
+  ],
+  "response": {
+    "contexts": [
+      {
+        "goal": "Follow these steps to perform this Screen Flicker Troubleshooting",
+        "title": "Screen flicker issue",
+        "actions": [
+          {
+            "actionName": "Verify Phone Internet Connection",
+            "description": "It will control Wi-Fi to connect",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Ensure your phone is connected to a stable Wi-Fi or mobile data network.",
+                  "Try loading a webpage or performing a quick search."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              },
+              {
+                "steps": [
+                  "Swipe down from the top of your phone's screen to open the Quick settings panel.",
+                  "Touch and hold the Wi-Fi icon to check your connection status."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "bixby://masked/val/9f9c37507d",
+                  "key": "Wi-Fi",
+                  "resultType": null,
+                  "condition": null,
+                  "value": null
+                },
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/cb03ac7425",
+                  "description": "Opens the Wi-Fi settings page in device Settings on the device.",
+                  "message": "View WiFi Settings",
+                  "classes": null,
+                  "originalType": "onClickURL"
+                }
+              },
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Connections.",
+                  "Tap Wi-Fi."
+                ],
+                "validationDeeplink": {
+                  "deeplink": "bixby://masked/val/9f9c37507d",
+                  "key": "Wi-Fi",
+                  "resultType": null,
+                  "condition": null,
+                  "value": null
+                },
+                "actionableDeeplink": {
+                  "deeplink": "bixby://masked/act/cb03ac7425",
+                  "description": "Opens the Wi-Fi settings page in device Settings on the device.",
+                  "message": "View WiFi Settings",
+                  "classes": null,
+                  "originalType": "onClickURL"
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Clear App Cache",
+            "description": "It will remove temporary app files",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Apps.",
+                  "Select your email app.",
+                  "Tap Storage.",
+                  "Tap Clear cache."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": {
+                  "deeplink": "bixby://dummy_positive",
+                  "description": "Open Storage settings under Apps",
+                  "message": "Open Storage",
+                  "classes": null,
+                  "originalType": null
+                }
+              }
+            ],
+            "category": "auto"
+          },
+          {
+            "actionName": "Review Email Account Settings",
+            "description": "It will refresh your email account setup",
+            "stepGroups": [
+              {
+                "steps": [
+                  "In such cases, you may need to remove and re-add your email account to your phone to apply the new configuration.",
+                  "Before proceeding, make sure you have your email account's username and password readily available."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Contact Email Service Provider",
+            "description": "It will connect you with expert help",
+            "stepGroups": [
+              {
+                "steps": [
+                  "If you have followed all the above steps and are still experiencing difficulties with your email connection, it is recommended to contact your email service provider directly for further assistance."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "manual"
+          },
+          {
+            "actionName": "Clear App Data",
+            "description": "It will reset the app completely",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Navigate to and open Settings.",
+                  "Tap Apps.",
+                  "Select your email app.",
+                  "Tap Storage.",
+                  "Tap Clear data.",
+                  "Tap OK."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "critical"
+          },
+          {
+            "actionName": "Restart Phone in Safe Mode",
+            "description": "It will isolate problematic third-party apps",
+            "stepGroups": [
+              {
+                "steps": [
+                  "Press and hold the Power button or Side button.",
+                  "If your phone doesn't have a dedicated Power button, swipe down from the top of the screen to open Quick settings, and then tap the Power icon.",
+                  "Touch and hold the Power off icon.",
+                  "Tap Safe mode when it appears on the screen.",
+                  "While in Safe mode, check if your email app is still experiencing issues.",
+                  "Restart your phone normally."
+                ],
+                "validationDeeplink": null,
+                "actionableDeeplink": null
+              }
+            ],
+            "category": "critical"
+          }
+        ],
+        "score": 0.72
+      }
+    ]
+  },
+  "meta": {
+    "latency_ms": 16.32,
+    "cache_hit": false,
+    "model": "deterministic-hybrid-v2",
+    "cost_usd": 0.0,
+    "fallback": null
+  }
+}

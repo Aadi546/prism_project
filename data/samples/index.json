@@ -1,27 +1,32 @@
 [
   {
-    "file": "01_swipe_navigation.json",
-    "query": "The mobile phone swipe navigation moves up or down instead of left or right after downloading an app",
-    "article_id": "siis_swipe_axis"
+    "file": "01_cracked_screen.json",
+    "query": "My Galaxy phone's screen is completely cracked, it's a total crack and I can't use the device.",
+    "article_id": "row_14",
+    "siis_provided": true
   },
   {
-    "file": "02_battery_drain.json",
-    "query": "My battery dies fast even on standby",
-    "article_id": "siis_battery_fast_drain"
+    "file": "02_touchscreen_lag.json",
+    "query": "My Galaxy S22 screen inputs are delayed and the touch responsiveness is laggy, causing a noticeable delay when I try to interact with the phone.",
+    "article_id": "row_21",
+    "siis_provided": true
   },
   {
-    "file": "03_screen_flicker.json",
-    "query": "Screen flickers at night when the brightness is low",
-    "article_id": "siis_screen_flicker"
+    "file": "03_black_screen.json",
+    "query": "My Galaxy S24 Ultra screen is completely black and won't turn on, even though the phone powers on, rings, and otherwise works; there is no physical damage.",
+    "article_id": "row_22",
+    "siis_provided": true
   },
   {
-    "file": "04_camera_blur.json",
-    "query": "Photos look smeared and the camera hunts for focus",
-    "article_id": "siis_camera_blur"
+    "file": "04_email_flash.json",
+    "query": "1. My Samsung A115G tablet screen flashes and then goes completely blank whenever I tap to open an email in Gmail, and after it works for a short time it goes blank again.",
+    "article_id": "row_1",
+    "siis_provided": true
   },
   {
-    "file": "05_slow_update.json",
-    "query": "Galaxy got laggy after the software update",
-    "article_id": "siis_slow_after_update"
+    "file": "05_multi_intent_no_siis.json",
+    "query": "1. \"My Galaxy Z Flip 7 screen is cracked again right where it folds.\"\n2. \"The touch doesn't work on certain parts of the screen.\"\n3. \"I can hardly see anything on the display.\"",
+    "article_id": "row_19",
+    "siis_provided": false
   }
 ]

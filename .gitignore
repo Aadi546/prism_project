@@ -6,3 +6,5 @@ web/node_modules/
 web/.next/
 .cache/
 engine_cache.json
+
+results.jsonl.tmp

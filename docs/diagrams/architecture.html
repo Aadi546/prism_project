@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>architecture</title>
+<style>
+  html, body { margin: 0; background: #ffffff; }
+  svg { display: block; font-family: "Segoe UI", Calibri, Arial, sans-serif; }
+  .box { fill: #ffffff; stroke: #1f2937; stroke-width: 2; }
+  .key { fill: #eef2ff; stroke: #1428a0; stroke-width: 2.5; }
+  .soft { fill: #f3f4f6; stroke: #9ca3af; stroke-width: 1.5; stroke-dasharray: 6 5; }
+  .t { font-size: 22px; font-weight: 600; fill: #111827; }
+  .s { font-size: 16px; fill: #4b5563; }
+  .n { font-size: 15px; font-weight: 700; fill: #1428a0; }
+  .lbl { font-size: 15px; fill: #374151; }
+  .arrow { stroke: #1f2937; stroke-width: 2; fill: none; marker-end: url(#a); }
+  .accent { stroke: #1428a0; stroke-width: 2.5; fill: none; marker-end: url(#b); }
+  .dash { stroke: #9ca3af; stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; }
+</style>
+</head>
+<body>
+<svg width="1600" height="770" viewBox="0 0 1600 770" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f2937"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1428a0"/></marker>
+  </defs>
+
+  <!-- cache hit shortcut -->
+  <path class="accent" d="M 520 200 C 520 70, 1380 70, 1380 196"/>
+  <text class="lbl" x="880" y="92" text-anchor="middle" fill="#1428a0">cache hit: plan back in ~1 ms, $0, no model call</text>
+
+  <!-- main row -->
+  <rect class="box" x="30" y="210" width="190" height="145" rx="10"/>
+  <text class="t" x="125" y="258" text-anchor="middle">Complaint</text>
+  <text class="s" x="125" y="286" text-anchor="middle">"screen is laggy</text>
+  <text class="s" x="125" y="308" text-anchor="middle">after update…"</text>
+  <text class="s" x="125" y="330" text-anchor="middle">+ SIIS text (optional)</text>
+
+  <rect class="box" x="250" y="210" width="190" height="145" rx="10"/>
+  <text class="n" x="266" y="236">0</text>
+  <text class="t" x="345" y="262" text-anchor="middle">Enrichment</text>
+  <text class="s" x="345" y="290" text-anchor="middle">canonical query,</text>
+  <text class="s" x="345" y="312" text-anchor="middle">symptoms, device,</text>
+  <text class="s" x="345" y="334" text-anchor="middle">intents, paraphrases</text>
+
+  <rect class="box" x="470" y="210" width="190" height="145" rx="10"/>
+  <text class="n" x="486" y="236">3</text>
+  <text class="t" x="565" y="262" text-anchor="middle">Semantic cache</text>
+  <text class="s" x="565" y="290" text-anchor="middle">exact key, then</text>
+  <text class="s" x="565" y="312" text-anchor="middle">char n-gram cosine</text>
+  <text class="s" x="565" y="334" text-anchor="middle">+ symptom check</text>
+
+  <rect class="box" x="690" y="210" width="190" height="145" rx="10"/>
+  <text class="n" x="706" y="236">1</text>
+  <text class="t" x="785" y="262" text-anchor="middle">SIIS lookup</text>
+  <text class="s" x="785" y="290" text-anchor="middle">TF-IDF over the</text>
+  <text class="s" x="785" y="312" text-anchor="middle">articles + relevance</text>
+  <text class="s" x="785" y="334" text-anchor="middle">gate</text>
+
+  <rect class="box" x="910" y="210" width="190" height="145" rx="10"/>
+  <text class="n" x="926" y="236">1</text>
+  <text class="t" x="1005" y="262" text-anchor="middle">Extraction</text>
+  <text class="s" x="1005" y="290" text-anchor="middle">sections → atomic</text>
+  <text class="s" x="1005" y="312" text-anchor="middle">steps, 1 screen per</text>
+  <text class="s" x="1005" y="334" text-anchor="middle">action, source spans</text>
+
+  <rect class="box" x="1130" y="210" width="190" height="145" rx="10"/>
+  <text class="n" x="1146" y="236">2</text>
+  <text class="t" x="1225" y="262" text-anchor="middle">Deeplink map</text>
+  <text class="s" x="1225" y="290" text-anchor="middle">setting name first,</text>
+  <text class="s" x="1225" y="312" text-anchor="middle">then descriptions,</text>
+  <text class="s" x="1225" y="334" text-anchor="middle">on/off twin picked</text>
+
+  <rect class="key" x="1350" y="200" width="220" height="165" rx="10"/>
+  <text class="n" x="1366" y="226">4</text>
+  <text class="t" x="1460" y="254" text-anchor="middle">Validate + API</text>
+  <text class="s" x="1460" y="282" text-anchor="middle">field rules, no URLs,</text>
+  <text class="s" x="1460" y="304" text-anchor="middle">auto → manual → critical</text>
+  <text class="s" x="1460" y="330" text-anchor="middle">POST /v1/troubleshoot</text>
+
+  <path class="arrow" d="M 220 275 L 248 275"/>
+  <path class="arrow" d="M 440 275 L 468 275"/>
+  <path class="arrow" d="M 660 275 L 688 275"/>
+  <text class="lbl" x="674" y="200" text-anchor="middle">miss</text>
+  <path class="arrow" d="M 880 275 L 908 275"/>
+  <path class="arrow" d="M 1100 275 L 1128 275"/>
+  <path class="arrow" d="M 1320 275 L 1348 275"/>
+
+  <!-- no match branch -->
+  <path class="arrow" d="M 785 355 L 785 420"/>
+  <rect class="box" x="690" y="422" width="190" height="70" rx="10"/>
+  <text class="t" x="785" y="452" text-anchor="middle" style="font-size:19px">Empty plan</text>
+  <text class="s" x="785" y="478" text-anchor="middle" style="font-size:14px">no_match / no_siis_context</text>
+
+  <!-- data sources -->
+  <rect class="soft" x="910" y="410" width="190" height="80" rx="10"/>
+  <text class="t" x="1005" y="442" text-anchor="middle" style="font-size:18px">Groq LLM</text>
+  <text class="s" x="1005" y="468" text-anchor="middle">optional, re-checked</text>
+  <path class="dash" d="M 1005 408 L 1005 357"/>
+
+  <rect class="soft" x="1130" y="410" width="190" height="80" rx="10"/>
+  <text class="t" x="1225" y="442" text-anchor="middle" style="font-size:18px">578 deeplinks</text>
+  <text class="s" x="1225" y="468" text-anchor="middle">masked catalog</text>
+  <path class="dash" d="M 1225 408 L 1225 357"/>
+
+  <rect class="soft" x="470" y="410" width="190" height="80" rx="10"/>
+  <text class="t" x="565" y="442" text-anchor="middle" style="font-size:18px">20 SIIS articles</text>
+  <text class="s" x="565" y="468" text-anchor="middle">kit knowledge base</text>
+  <path class="dash" d="M 640 408 L 720 357"/>
+
+  <!-- closed loop -->
+  <path class="accent" d="M 1460 365 L 1460 552"/>
+  <rect class="key" x="760" y="554" width="810" height="185" rx="12"/>
+  <text class="t" x="790" y="600">Closed loop on the phone (our add-on)</text>
+  <text class="s" x="790" y="634">1. tap the actionableDeeplink, the right Settings screen opens</text>
+  <text class="s" x="790" y="662">2. read the setting back through validationDeeplink (val/ link)</text>
+  <text class="s" x="790" y="690">3. compare with resultType / condition / value, e.g. Touch sensitivity == True</text>
+  <text class="s" x="790" y="716">4. all safe fixes confirmed and still broken? only then show restart / safe mode / reset</text>
+
+  <text class="s" x="30" y="600" style="font-size:15px">Numbers are the stages from the Theme 2 brief.</text>
+  <text class="s" x="30" y="624" style="font-size:15px">Dashed boxes are data / optional parts.</text>
+</svg>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "_readme": "Hand-labelled expectations per SIIS article (keyed by article title). required = regexes that must each match some action (name + steps); critical = regexes whose matching action must be category 'critical'; manual = regexes whose matching action must be 'manual'; links = regex -> acceptable catalog ids for the step group that matches the regex (exact target screen). Anything else in a plan must be grounded in the SIIS text.",
+  "Email server not responding on Samsung phone or tablet": {
+    "required": ["pc|computer", "internet|wi-?fi", "account", "cache", "safe mode", "provider|contact"],
+    "critical": ["safe mode", "clear data"],
+    "manual": ["personal computer"],
+    "links": {"tap wi-?fi": ["DL-0313", "DL-0574", "DL-0573"]}
+  },
+  "Blank or black display on a Samsung phone or tablet": {
+    "required": ["physical|liquid", "force|restart", "charge", "power"],
+    "critical": ["force|restart"],
+    "manual": ["liquid|ldi", "charger"],
+    "links": {}
+  },
+  "Some things to check first": {
+    "required": ["mouse|usb|keyboard", "restart"],
+    "critical": ["forcing a restart|force"],
+    "manual": ["mouse"],
+    "links": {}
+  },
+  "Transfer Secure folder with Smart Switch": {
+    "required": ["wired|wireless|usb cable", "smart switch", "qr|wireless transfer"],
+    "critical": [],
+    "manual": ["usb cable"],
+    "links": {}
+  },
+  "Use Multi window and App pairs on your Galaxy phone or tablet": {
+    "required": ["edge panel", "multi window|split screen|pop-up|home icon"],
+    "critical": [],
+    "manual": [],
+    "links": {"swipe for split screen": ["DL-0270"], "swipe for pop-up": ["DL-0268"]}
+  },
+  "Screen mirroring to your Samsung TV": {
+    "required": ["smart view", "timeout|aspect ratio"],
+    "critical": ["factory data reset"],
+    "manual": [],
+    "links": {"screen timeout": ["DL-0220"]}
+  },
+  "Access your Galaxy phone's data if the screen does not respond": {
+    "required": ["mouse", "hdmi|monitor|tv"],
+    "critical": [],
+    "manual": ["mouse", "hdmi"],
+    "links": {}
+  },
+  "Screen flickers when using the Camera on a Galaxy phone": {
+    "required": ["lighting|super steady|shutter"],
+    "critical": [],
+    "manual": [],
+    "links": {}
+  },
+  "Cracked or bleeding screen on Galaxy phone or tablet": {
+    "required": ["repair|service"],
+    "critical": [],
+    "manual": ["repair"],
+    "links": {"back up data": ["DL-0542"]}
+  },
+  "Screen does not rotate on Galaxy phone or tablet": {
+    "required": ["physical damage", "orientation|auto rotate", "restart", "factory data reset", "rotat"],
+    "critical": ["tap restart", "factory data reset"],
+    "manual": ["cracks"],
+    "links": {"back up data": ["DL-0542"]}
+  },
+  "Touchscreen issues on a Galaxy phone or tablet": {
+    "required": ["protector|interference", "restart", "charger", "navigation bar|gesture", "touch sensitivity", "safe mode", "factory data reset"],
+    "critical": ["tap restart", "safe mode", "factory data reset"],
+    "manual": ["charger"],
+    "links": {"switch next to touch sensitivity\\.$": ["DL-0126"], "to disable it|turn off this feature": ["DL-0125"], "tap navigation bar": ["DL-0169"], "back up data": ["DL-0542"]}
+  }
+}
