@@ -25,7 +25,13 @@ try:
 
     load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 except ImportError:
-    pass
+    _env_file = Path(__file__).resolve().parents[1] / ".env"
+    if _env_file.exists():
+        for _line in _env_file.read_text(encoding="utf-8").splitlines():
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                os.environ.setdefault(_k.strip(), _v.strip().strip("'\""))
 
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
 DEFAULT_MODEL = "llama-3.3-70b-versatile"
