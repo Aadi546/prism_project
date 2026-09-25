@@ -47,7 +47,7 @@ SYMPTOMS: list[Symptom] = [
     _s("email", r"\b(e-?mail|gmail|outlook)\b",
        "Email app display", "Email App", "the screen goes blank when opening email"),
     _s("transfer", r"\b(smart switch|transfer (my )?data|qr code|data transfer)\b",
-       "Smart Switch transfer", "Data Transfer", "Smart Switch cannot transfer data"),
+       "Data Transfer setup", "Data Transfer", "Data Transfer cannot move data"),
     _s("fingerprint", r"\b(fingerprint|biometric)s?\b",
        "Fingerprint unlock issue", "Fingerprint Unlock", "the fingerprint sensor does not unlock the phone"),
     _s("battery", r"\b(battery|drain(s|ing)?|dies fast)\b",
@@ -80,7 +80,7 @@ CRITICAL_RE = re.compile(
 )
 # Physical / human interventions — never carry an actionable deeplink.
 MANUAL_RE = re.compile(
-    r"\b(service cent(er|re)|repair|walk-in|mail-in|contact (samsung|your|the)|support cent(er|re)|samsung support|"
+    r"\b(service cent(er|re)|repair|walk-in|mail-in|contact (samsung|techcorp|customer|your|the)|support cent(er|re)|samsung support|customer support|"
     r"premium care|inspect|physical damage|liquid|charger|charging port|charge (the|your) (device|phone)|"
     r"usb (cable|mouse|adapter)|hdmi|monitor|mouse|keyboard|adapter|screen protector|microfiber|cloth|"
     r"personal computer|on a pc|on your pc|lighting|flashlight|ejector|sim|service provider|email provider|"

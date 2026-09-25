@@ -8,7 +8,7 @@ brief never says how to fill it. We derive it from the catalog row we tapped:
     updateURL  → integer  greater|less (direction of the step)
     onClickURL → key only (opening a page changes nothing we can read back)
 
-`DeviceSimulator` stands in for the on-device agent that would resolve a `bixby://…/val/…`
+`DeviceSimulator` stands in for the on-device agent that would resolve a `voiceassist://…/val/…`
 URI to the live setting value. It lets the console show a plan being executed and
 verified step by step, and lets eval measure "resolved before the critical tier".
 """

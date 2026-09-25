@@ -3,11 +3,11 @@
     "query": "1. \"My Galaxy Z Flip 7 screen is cracked again right where it folds.\"\n2. \"The touch doesn't work on certain parts of the screen.\"\n3. \"I can hardly see anything on the display.\"",
     "siis_response": null
   },
-  "query": "1. \"My Galaxy Z Flip 7 screen is cracked again right where it folds.\"\n2. \"The touch doesn't work on certain parts of the screen.\"\n3. \"I can hardly see anything on the display.\"",
+  "query": "1. \"My Nexa Fold X1 screen is cracked again right where it folds.\"\n2. \"The touch doesn't work on certain parts of the screen.\"\n3. \"I can hardly see anything on the display.\"",
   "query_variations": [
     "My Galaxy Z Flip 7 screen is cracked again right where it folds. 2. The touch doesn't work on certain parts of the screen. 3. I can hardly see anything on the display.",
     "My Galaxy Z Flip 7 has an issue where the screen is cracked. How can I resolve this?",
-    "hey, the screen is cracked on my Z Flip 7 — any fix?",
+    "hey, the screen is cracked on my Z Flip 7 \u2014 any fix?",
     "Z Flip 7 screen cracked again right where folds",
     "This is so annoying, the screen is cracked again on my Z Flip 7!",
     "my Z Flip 7 screen is crakced",
@@ -33,16 +33,16 @@
                   "Select Back up data to secure your personal files."
                 ],
                 "validationDeeplink": {
-                  "deeplink": "bixby://masked/val/266037d0c5",
-                  "key": "Back up data (Samsung Cloud)",
+                  "deeplink": "voiceassist://masked/val/266037d0c5",
+                  "key": "Back up data (TechCorp Cloud)",
                   "resultType": "boolean",
                   "condition": "equal",
                   "value": "True"
                 },
                 "actionableDeeplink": {
-                  "deeplink": "bixby://masked/act/b3ed3ed663",
-                  "description": "Enables data backup to Samsung Cloud via device Settings on the device.",
-                  "message": "Enable Back up data (Samsung Cloud)",
+                  "deeplink": "voiceassist://masked/act/b3ed3ed663",
+                  "description": "Enables data backup to TechCorp Cloud via device Settings on the device.",
+                  "message": "Enable Back up data (TechCorp Cloud)",
                   "classes": null,
                   "originalType": "onURL"
                 }
@@ -83,16 +83,16 @@
                   "Select Back up data to secure your personal files."
                 ],
                 "validationDeeplink": {
-                  "deeplink": "bixby://masked/val/266037d0c5",
-                  "key": "Back up data (Samsung Cloud)",
+                  "deeplink": "voiceassist://masked/val/266037d0c5",
+                  "key": "Back up data (TechCorp Cloud)",
                   "resultType": "boolean",
                   "condition": "equal",
                   "value": "True"
                 },
                 "actionableDeeplink": {
-                  "deeplink": "bixby://masked/act/b3ed3ed663",
-                  "description": "Enables data backup to Samsung Cloud via device Settings on the device.",
-                  "message": "Enable Back up data (Samsung Cloud)",
+                  "deeplink": "voiceassist://masked/act/b3ed3ed663",
+                  "description": "Enables data backup to TechCorp Cloud via device Settings on the device.",
+                  "message": "Enable Back up data (TechCorp Cloud)",
                   "classes": null,
                   "originalType": "onURL"
                 }
@@ -184,7 +184,7 @@
                   "Disconnect the phone or tablet from the charger.",
                   "Try to turn it on by pressing and holding the Power button (or Side button) for 15 to 20 seconds.",
                   "Turn off your device and reconnect it to the appropriate charger until it is fully charged.",
-                  "In this case, please contact the Samsung Support Center for further assistance."
+                  "In this case, please contact the Customer Support Center for further assistance."
                 ],
                 "validationDeeplink": null,
                 "actionableDeeplink": null

@@ -26,8 +26,11 @@ ENGINE_MODEL = "deterministic-hybrid-v2"
 NO_MATCH = "no_match"
 NO_SIIS = "no_siis_context"
 RETRIEVAL_FLOOR = 0.12  # below this no SIIS article is about the complaint
-CONTENT_FLOOR = 0.012  # long articles vs one short sub-intent (symptom agreement also required)
+CONTENT_FLOOR = 0.012  # long articles vs one short sub-intent
 RELEVANCE_FLOOR = 0.02  # provided SIIS that shares (almost) nothing with the complaint
+QUERY_FLOOR = 0.28  # incoming complaint vs a kit original_query (same length class)
+QUERY_MARGIN = 0.06  # unique nearest kit question
+QUERY_COVERAGE = 0.25  # distinctive tokens of the complaint must appear in that kit question
 
 
 class Stopwatch:
@@ -65,6 +68,9 @@ class TroubleshootingEngine:
         self.siis_matrix = self.siis_vec.fit_transform(self.article_text or ["empty"])
         # content-only view: sub-intents of a compound complaint must not match the whole ticket
         self.content_matrix = self.siis_vec.transform([_siis_blob(a.get("siis_response")) for a in self.articles] or ["empty"])
+        self.kit_queries = [a.get("original_query") or "" for a in self.articles]
+        self.query_vec = TfidfVectorizer(stop_words="english", sublinear_tf=True, ngram_range=(1, 2))
+        self.query_matrix = self.query_vec.fit_transform(self.kit_queries or ["empty"])
         corpus = [_siis_blob(a.get("siis_response")) for a in self.articles] + [
             f"{r.get('description')} {r.get('qna_description') or ''}" for r in self.catalog.rows
         ]
@@ -162,6 +168,22 @@ class TroubleshootingEngine:
         return resp, self._trace(info, sw)
 
     # ------------------------------------------------------------------ stages
+    def _nearest_kit(self, query: str) -> tuple[int, float, float]:
+        sims = (self.query_matrix @ self.query_vec.transform([query]).T).toarray().ravel()
+        if not len(sims):
+            return 0, 0.0, 0.0
+        order = np.argsort(-sims)
+        top = float(sims[order[0]])
+        second = float(sims[order[1]]) if len(order) > 1 else 0.0
+        return int(order[0]), top, second
+
+    def _accept_kit(self, query: str, idx: int, top: float, second: float) -> bool:
+        if self.coverage(query, self.kit_queries[idx]) < QUERY_COVERAGE:
+            return False
+        if top >= QUERY_FLOOR:
+            return True
+        return top >= 0.18 and (top - second) >= QUERY_MARGIN
+
     def _retrieve(self, query: str, provided: Any, content_only: bool = False) -> tuple[Optional[dict], float, dict]:
         qv = self.siis_vec.transform([query])
         if provided is not None:
@@ -169,10 +191,21 @@ class TroubleshootingEngine:
             rel = float((self.siis_vec.transform([blob]) @ qv.T).toarray()[0, 0])
             art = {"id": "provided", "siis_response": provided}
             info = {"source": "request", "relevance": round(rel, 3), "hash": _hash(blob)}
-            if rel < RELEVANCE_FLOOR and not self._symptom_overlap(query, blob):
+            if rel < RELEVANCE_FLOOR and self.coverage(query, blob) < QUERY_COVERAGE:
                 info["gate"] = "rejected: provided SIIS does not address the complaint"
                 return None, rel, info
             return art, rel, info
+        if not content_only and self.kit_queries:
+            idx, qsim, q2 = self._nearest_kit(query)
+            info_q = {
+                "source": "kit_query",
+                "score": round(qsim, 3),
+                "runner_up": round(q2, 3),
+                "id": self.articles[idx].get("id"),
+                "hash": _hash(self.article_text[idx]),
+            }
+            if self._accept_kit(query, idx, qsim, q2):
+                return self.articles[idx], qsim, info_q
         sims = ((self.content_matrix if content_only else self.siis_matrix) @ qv.T).toarray().ravel()
         if not len(sims):
             return None, 0.0, {"source": "index", "candidates": []}
@@ -188,8 +221,11 @@ class TroubleshootingEngine:
         top = int(order[0])
         info = {"source": "index", "candidates": cands, "hash": _hash(self.article_text[top])}
         floor = CONTENT_FLOOR if content_only else RETRIEVAL_FLOOR
-        if sims[top] < floor or (content_only and not self._symptom_overlap(query, self.article_text[top])):
+        if sims[top] < floor:
             info["gate"] = f"rejected: best article {sims[top]:.3f} < {floor}"
+            return None, float(sims[top]), info
+        if content_only and self.coverage(query, self.article_text[top]) < 0.12:
+            info["gate"] = "rejected: sub-intent does not overlap article content"
             return None, float(sims[top]), info
         return self.articles[top], float(sims[top]), info
 
@@ -298,5 +334,5 @@ class TroubleshootingEngine:
             "cache_entries": len(self.cache),
             "model": self.model_id,
             "llm": {"provider": "groq", "enabled": self.llm.enabled, "model": self.llm.model},
-            "indexes": {"deeplink": True, "siis": True, "cache": self.cache.primed()},
+            "indexes": {"deeplink": True, "siis": True, "cache": self.cache.primed(), "kit_query": True},
         }

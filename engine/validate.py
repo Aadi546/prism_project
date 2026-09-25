@@ -43,7 +43,7 @@ DESCRIPTION_TEMPLATES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"pc|computer", re.I), "It will isolate account versus phone problems"),
     (re.compile(r"mouse|keyboard|usb", re.I), "It will let you reach your data"),
     (re.compile(r"hdmi|monitor|tv", re.I), "It will show your screen externally"),
-    (re.compile(r"smart switch|transfer", re.I), "It will move data between devices"),
+    (re.compile(r"smart switch|data transfer|transfer", re.I), "It will move data between devices"),
     (re.compile(r"orientation|rotat", re.I), "It will fix screen orientation behavior"),
     (re.compile(r"touch sensitivity", re.I), "It will tune touch response sensitivity"),
     (re.compile(r"navigation|gesture", re.I), "It will stop gestures misreading touches"),
@@ -93,7 +93,7 @@ def sentence_case_title(text: str) -> str:
     return " ".join([first[0].upper() + first[1:].lower(), *[w if w.isupper() else w.lower() for w in rest]])
 
 
-PROPER_NOUNS = {"Samsung", "Galaxy", "Smart", "View", "Switch", "SmartThings", "Wi-Fi", "Bluetooth", "Edge", "Google", "PC"}
+PROPER_NOUNS = {"Samsung", "Galaxy", "TechCorp", "Nexa", "Smart", "View", "Switch", "SmartThings", "Wi-Fi", "Bluetooth", "Edge", "Google", "PC"}
 CUT_BEFORE = {"for", "to", "with", "when", "so", "and", "by", "in", "on", "that", "which", "while", "from", "if"}
 
 
@@ -170,7 +170,9 @@ def catalog_uris(catalog: Iterable[dict]) -> set[str]:
 def deeplink_allowed(uri: str, allowed: set[str]) -> bool:
     if not uri or uri not in allowed:
         return False
-    return uri == DUMMY_URI or uri.startswith("bixby://masked/")
+    if uri == DUMMY_URI or uri.endswith("://dummy_positive"):
+        return True
+    return uri.startswith("voiceassist://masked/") or uri.startswith("bixby://masked/")
 
 
 def clean_step(step: str) -> str:

@@ -6,11 +6,11 @@
       "content": "Mobile Accessories,Smartphone,Tablet,Others Mobile Cracked or bleeding screen on Galaxy phone or tablet ( Mobile Accessories,Smartphone,Tablet,Others Mobile): # Service Options for Cracked Screens\nWe understand that dealing with a cracked screen can be frustrating. Here are the service options available to help you get your Samsung device repaired:\n## Samsung Repair Services\nYou can schedule a walk-in or mail-in repair to fix your cracked screen using Samsung genuine parts. Visit Samsung Repair Services for more information.\n## Samsung Authorized Service Centers\nFor fast, quality repairs you can trust and rely on, visit a local Samsung Authorized Service Center. You can learn more about the cost of the repair.\n## Samsung Premium Care\nIf you have a Samsung Premium Care service contract, it covers accidental damage from handling with a low deductible. This service extends protection after your standard warranty runs out, providing coverage for repairs or replacements. Terms and Conditions apply. Learn more at Samsung Premium Care.\n## Understanding Screen Damage\nThere are a few common ways screens can be damaged:\n### Cracked Screen\nObvious cracks on the screen usually result from an impact to the front of the device.\n### Ink Blots\nIf your device shows a round spot of dead pixels, it might have experienced gradual pressure that kept the front glass intact but damaged the screen underneath.\n### Bleeding Pixels\nBleeding pixels are typically caused by an impact to the edge of the device. This can result in rows or columns of pixels displaying black or oddly colored lines."
     }
   },
-  "query": "My Galaxy phone's screen is completely cracked, it's a total crack and I can't use the device.",
+  "query": "My smartphone's screen is completely cracked, it's a total crack and I can't use the device.",
   "query_variations": [
     "My Galaxy phone's screen is completely cracked, it's a total crack and I can't use the device.",
     "My Galaxy phone has an issue where the screen is cracked. How can I resolve this?",
-    "hey, the screen is cracked on my phone — any fix?",
+    "hey, the screen is cracked on my phone \u2014 any fix?",
     "phone devices screen cracked total use",
     "This is so annoying, the screen is cracked again on my phone!",
     "my phone screen is crakced",
@@ -36,16 +36,16 @@
                   "Select Back up data to secure your personal files."
                 ],
                 "validationDeeplink": {
-                  "deeplink": "bixby://masked/val/266037d0c5",
-                  "key": "Back up data (Samsung Cloud)",
+                  "deeplink": "voiceassist://masked/val/266037d0c5",
+                  "key": "Back up data (TechCorp Cloud)",
                   "resultType": "boolean",
                   "condition": "equal",
                   "value": "True"
                 },
                 "actionableDeeplink": {
-                  "deeplink": "bixby://masked/act/b3ed3ed663",
-                  "description": "Enables data backup to Samsung Cloud via device Settings on the device.",
-                  "message": "Enable Back up data (Samsung Cloud)",
+                  "deeplink": "voiceassist://masked/act/b3ed3ed663",
+                  "description": "Enables data backup to TechCorp Cloud via device Settings on the device.",
+                  "message": "Enable Back up data (TechCorp Cloud)",
                   "classes": null,
                   "originalType": "onURL"
                 }

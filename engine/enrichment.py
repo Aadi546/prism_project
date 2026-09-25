@@ -61,6 +61,19 @@ def detect_symptoms(text: str) -> list[str]:
     return [s.key for s in SYMPTOMS if s.pattern.search(text or "")]
 
 
+GENERIC_CONTENT = {
+    "screen",
+    "device",
+    "phone",
+    "tablet",
+    "display",
+    "nexa",
+    "techcorp",
+    "galaxy",
+    "samsung",
+}
+
+
 def normalize_query(text: str) -> str:
     q = clean_query(text).lower()
     q = DEVICE_RE.sub(" ", q)
@@ -73,6 +86,11 @@ def normalize_query(text: str) -> str:
         if t not in seen:
             seen.append(t)
     return " ".join(seen)
+
+
+def content_tokens(text: str) -> set[str]:
+    """Distinctive words after normalization — used to decide two complaints are about the same fault."""
+    return {w for w in normalize_query(text).split() if len(w) > 2} - GENERIC_CONTENT
 
 
 def semantic_cache_key(canonical: str, symptoms: list[str]) -> str:

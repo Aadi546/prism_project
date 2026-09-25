@@ -15,8 +15,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from engine.lexicon import SETTING_SYNONYMS
 
-DUMMY_URI = "bixby://dummy_positive"
-NON_PHONE_RE = re.compile(r"\b(tv settings|tv bixby|air conditioner|retrieves)\b", re.IGNORECASE)
+DUMMY_URI = "voiceassist://dummy_positive"
+NON_PHONE_RE = re.compile(r"\b(tv settings|tv bixby|tv voiceassist|air conditioner|retrieves)\b", re.IGNORECASE)
 GENERIC_KEYS = {"onurl", "offurl", "more options", "settings", "battery", "accessibility", "alarm"}
 
 

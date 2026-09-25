@@ -21,8 +21,8 @@ ARTICLES = json.loads((ROOT / "data" / "siis_responses.json").read_text(encoding
 CATALOG = json.loads((ROOT / "data" / "deeplinks.json").read_text(encoding="utf-8"))["deeplinks"]
 ALLOWED = {r["deeplink"] for r in CATALOG}
 VAL_ALLOWED = {(r.get("validation") or {}).get("deeplink") for r in CATALOG}
-CRACKED = "My Galaxy phone's screen is completely cracked, it's a total crack and I can't use the device."
-TOUCH = "My Galaxy S22 screen inputs are delayed and the touch responsiveness is laggy, causing a noticeable delay when I try to interact with the phone."
+CRACKED = "My smartphone's screen is completely cracked, it's a total crack and I can't use the device."
+TOUCH = "My Nexa X1 screen inputs are delayed and the touch responsiveness is laggy, causing a noticeable delay when I try to interact with the phone."
 
 
 @pytest.fixture(scope="session")
@@ -64,7 +64,7 @@ def test_no_url_leak_and_catalog_only(engine):
         blob = resp.model_dump_json()
         assert not collect_urls(resp.response.model_dump_json())
         assert "```" not in blob
-        for uri in re.findall(r"bixby://[^\"]+", blob):
+        for uri in re.findall(r"(?:voiceassist|bixby)://[^\"]+", blob):
             assert uri in ALLOWED or uri in VAL_ALLOWED
 
 
@@ -137,7 +137,7 @@ def test_cache_hit_on_repeat_and_paraphrase():
     eng = TroubleshootingEngine(prewarm=True, use_llm=False)
     first = eng.troubleshoot(CRACKED)
     assert first.meta.cache_hit is True  # pre-warmed from the knowledge base pair
-    para = eng.troubleshoot("The display on my Samsung phone is completely shattered, I can't use it")
+    para = eng.troubleshoot("The display on my smartphone is completely shattered, I can't use it")
     assert para.meta.cache_hit is True
     assert para.meta.cost_usd == 0.0
     assert para.meta.latency_ms < 300
@@ -150,15 +150,59 @@ def test_low_score_plans_are_not_cached():
     assert len(eng.cache) == 0 and eng.cache.rejected == 1
 
 
+@pytest.fixture(scope="module")
+def warm_engine():
+    return TroubleshootingEngine(prewarm=True, use_llm=False)
+
+
+@pytest.mark.parametrize(
+    "para,kit_q",
+    [
+        ("The display on my smartphone is completely shattered, I can't use it", CRACKED),
+        ("My new smartphone screen not fitting full screen", KIT_QUERIES[6]),
+        ("Nexa X1 touch is laggy and delayed when I tap", TOUCH),
+        ("There's a floating circle on my Nexa I want gone", KIT_QUERIES[10]),
+    ],
+)
+def test_kit_paraphrases_reuse_the_same_plan(warm_engine, para, kit_q):
+    gold = warm_engine.troubleshoot(kit_q)
+    got = warm_engine.troubleshoot(para)
+    assert gold.response.contexts, kit_q
+    assert got.response.contexts, para
+    assert got.response.contexts[0].title == gold.response.contexts[0].title
+    assert got.response.contexts[0].goal == gold.response.contexts[0].goal
+
+
+def test_unknown_intents_stay_empty_after_prewarm(warm_engine):
+    for q in (
+        "My phone's infrared blaster no longer controls my AC remote app",
+        "The wireless charging coil in my phone is dead",
+    ):
+        resp = warm_engine.troubleshoot(q)
+        assert resp.response.contexts == [], q
+        assert resp.meta.fallback in {"no_match", "no_siis_context"}
+
+
 # ---------------------------------------------------------------- verification loop
 def test_closed_loop_verification_on_simulator(engine):
     resp = engine.troubleshoot(TOUCH, ARTICLES[[a["id"] for a in ARTICLES].index("row_21")]["siis_response"])
     payload = resp.response.model_dump(mode="json")
     sess = engine.sim.start(payload, seed=1)
+    groups = [
+        g
+        for c in payload["contexts"]
+        for a in c["actions"]
+        for g in a["stepGroups"]
+        if g["validationDeeplink"]
+        and g["validationDeeplink"].get("resultType") == "boolean"
+        and g.get("actionableDeeplink")
+    ]
+    assert groups, "expected a boolean validation deeplink"
     group = next(
-        g for c in payload["contexts"] for a in c["actions"] for g in a["stepGroups"]
-        if g["validationDeeplink"] and g["validationDeeplink"].get("resultType") == "boolean"
+        (g for g in groups if engine.sim.verify(sess.id, g["validationDeeplink"])["passed"] is False),
+        None,
     )
+    assert group is not None
     before = engine.sim.verify(sess.id, group["validationDeeplink"])
     assert before["passed"] is False
     engine.sim.tap(sess.id, group["actionableDeeplink"]["deeplink"], group["validationDeeplink"])
@@ -171,7 +215,7 @@ def test_health(client):
     body = client.get("/health").json()
     assert body["status"] == "ok"
     assert body["catalog"] >= 500
-    assert body["indexes"] == {"deeplink": True, "siis": True, "cache": True}
+    assert body["indexes"] == {"deeplink": True, "siis": True, "cache": True, "kit_query": True}
 
 
 def test_api_roundtrip_pure_json(client):

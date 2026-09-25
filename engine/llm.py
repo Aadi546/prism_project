@@ -43,7 +43,7 @@ PRICES = {
     "openai/gpt-oss-20b": (0.10, 0.50),
 }
 
-EXTRACT_PROMPT = """You convert Samsung customer-care reference text into a troubleshooting plan.
+EXTRACT_PROMPT = """You convert customer-care reference text into a troubleshooting plan.
 Rules:
 - Use ONLY instructions that appear in REFERENCE. Copy step wording closely; one physical interaction per step.
 - Skip explanations, notes, glossary, marketing and anything about PCs, TVs or iPhones.

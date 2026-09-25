@@ -28,7 +28,7 @@ EVAL = ROOT / "eval"
 
 URL_RE = re.compile(r"(https?://|www\.|\b[\w-]+\.(com|org|net|io)\b|\[[^\]]+\]\([^)]+\))", re.I)
 GOAL_RE = re.compile(r"^Follow these steps to perform this .+ (Troubleshooting|Configuration)$")
-DUMMY = "bixby://dummy_positive"
+DUMMY = "voiceassist://dummy_positive"
 SMALL = {"and", "or", "the", "a", "an", "in", "on", "of", "to", "for", "with", "via", "at", "by"}
 
 
@@ -239,7 +239,7 @@ def evaluate(engine_path: str | None, label: str) -> dict:
             pass
         body = json.dumps(r["response"])
         leaks += len(URL_RE.findall(body))
-        for u in re.findall(r"bixby://[^\"]+", body):
+        for u in re.findall(r"(?:voiceassist|bixby)://[^\"]+", body):
             uris += 1
             uris_ok += u in allowed
         for g in r["response"]["contexts"]:
@@ -367,9 +367,9 @@ def _markers(title: str) -> list[str]:
     """Words that only appear in plans built from a given article (used to judge cache hits)."""
     table = {
         "Email server": ["email"], "Blank or black": ["liquid damage indicator", "charge the device"],
-        "Some things": ["usb adapter", "mouse and keyboard"], "Transfer Secure": ["smart switch"],
+        "Some things": ["usb adapter", "mouse and keyboard"], "Transfer Secure": ["data transfer", "smart switch"],
         "Use Multi window": ["edge panel", "multi window", "pop-up"], "Screen mirroring": ["smart view"],
-        "Access your Galaxy": ["hdmi", "mouse"], "Screen flickers": ["shutter", "super steady"],
+        "Access your smartphone": ["hdmi", "mouse"], "Access your Galaxy": ["hdmi", "mouse"], "Screen flickers": ["shutter", "super steady"],
         "Cracked or bleeding": ["repair"], "Screen does not rotate": ["rotat", "orientation"],
         "Touchscreen issues": ["touch sensitivity", "screen protector"],
     }
@@ -497,7 +497,7 @@ def write_markdown(m: dict, before: dict | None, abl: list[dict]) -> str:
         "## 7. Known Edge Cases & System Limitations",
         "",
         "* Several kit queries are paired with only loosely related SIIS articles (e.g. *screen stays small* → Smart View mirroring, *floating circle* → Multi window). The engine plans from what the article says and lowers `score`; the Assistant-menu screen the floating circle needs is not in the catalog.",
-        "* The catalog has no entries for Safe mode, Software update, Apps › Storage, Smart View or Auto rotate, so those steps are either critical (no one-tap by design) or use `bixby://dummy_positive` when they follow a Settings path.",
+        "* The catalog has no entries for Safe mode, Software update, Apps › Storage, Smart View or Auto rotate, so those steps are either critical (no one-tap by design) or use `voiceassist://dummy_positive` when they follow a Settings path.",
         "* SIIS content with words glued together (\"Some things to check first\" sections) is dropped rather than repaired.",
         "* Deterministic extraction is tuned on the 11 distinct kit articles; the Groq path is the intended generaliser for unseen article layouts.",
         "* Cache judgement of *wrong* hits uses article-specific marker words; hits across the six \"blank display\" rows count as correct because they share the same article.",
