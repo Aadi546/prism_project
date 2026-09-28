@@ -52,11 +52,11 @@ function ValueControl({ value, kind }: { value: string | null | undefined; kind:
 
 export function PhoneSimulator({ screen, settings, verify, busy, onBack, sessionId }: Props) {
   return (
-    <div className="mx-auto w-full max-w-[275px]">
-      <div className="rounded-[2.2rem] bg-phone-frame p-2 shadow-md ring-1 ring-foreground/10">
-        <div className="relative flex h-[435px] flex-col overflow-hidden rounded-[1.75rem] bg-phone-screen text-foreground">
+    <div className="mx-auto w-full max-w-[235px]">
+      <div className="rounded-[2.2rem] bg-phone-frame p-1.5 shadow-md ring-1 ring-foreground/10">
+        <div className="relative flex h-[435px] flex-col overflow-hidden rounded-[1.8rem] bg-phone-screen text-foreground">
           {/* status bar */}
-          <div className="flex items-center justify-between px-4 pt-2.5 pb-0.5 text-[10px] text-muted-foreground">
+          <div className="flex items-center justify-between px-3.5 pt-2 pb-0.5 text-[9.5px] text-muted-foreground">
             <span className="font-medium tabular-nums">9:41</span>
             <span className="absolute left-1/2 top-2 size-2.5 -translate-x-1/2 rounded-full bg-phone-frame" />
             <span className="flex items-center gap-1">

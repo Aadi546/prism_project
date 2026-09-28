@@ -228,7 +228,7 @@ export function TroubleshootingConsole() {
         </p>
       </div>
 
-      <div className="grid items-start gap-4 lg:grid-cols-[290px_minmax(0,1fr)_270px] xl:grid-cols-[330px_minmax(0,1fr)_280px] 2xl:grid-cols-[380px_minmax(0,1fr)_300px]">
+      <div className="grid items-start gap-4 lg:grid-cols-[290px_minmax(0,1fr)_245px] xl:grid-cols-[330px_minmax(0,1fr)_250px] 2xl:grid-cols-[380px_minmax(0,1fr)_260px]">
         {/* input */}
         <section className="flex flex-col gap-2.5 rounded-xl border border-border bg-card p-3 lg:sticky lg:top-12">
           <label className="text-xs font-semibold" htmlFor="query">
