@@ -216,22 +216,22 @@ export function TroubleshootingConsole() {
       : null;
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-3 sm:px-6 lg:px-8">
-      <header className="flex max-w-3xl flex-col gap-1">
-        <h1 className="font-heading text-2xl leading-tight font-semibold tracking-tight text-pretty sm:text-3xl">
-          Vague complaint in. <span className="text-primary">Verified one-tap plan out.</span>
-        </h1>
-        <p className="text-xs leading-5 text-muted-foreground sm:text-sm">
-          The engine reads the Samsung knowledge-base article, keeps only steps it can point to in the text, maps each
-          Settings step to the exact catalog screen, orders safe → physical → disruptive, and then proves the fix on a
-          simulated device.
+    <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-2.5 px-4 py-2 sm:px-6 lg:px-8">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/50 pb-1.5">
+        <div>
+          <h1 className="font-heading text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+            Vague complaint in. <span className="text-primary">Verified one-tap plan out.</span>
+          </h1>
+        </div>
+        <p className="hidden text-xs text-muted-foreground lg:inline">
+          Extracts atomic steps, maps Bixby deeplinks, and verifies fixes on a simulated device.
         </p>
-      </header>
+      </div>
 
-      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[320px_minmax(0,1fr)_300px]">
+      <div className="grid items-start gap-4 lg:grid-cols-[290px_minmax(0,1fr)_270px] xl:grid-cols-[330px_minmax(0,1fr)_280px] 2xl:grid-cols-[380px_minmax(0,1fr)_300px]">
         {/* input */}
-        <section className="flex flex-col gap-3 rounded-xl border border-border bg-card p-3.5 lg:col-span-2 xl:sticky xl:top-14 xl:col-span-1">
-          <label className="text-sm font-medium" htmlFor="query">
+        <section className="flex flex-col gap-2.5 rounded-xl border border-border bg-card p-3 lg:sticky lg:top-12">
+          <label className="text-xs font-semibold" htmlFor="query">
             Customer complaint
           </label>
           <Textarea
@@ -242,22 +242,22 @@ export function TroubleshootingConsole() {
               if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) submit();
             }}
             placeholder="My Galaxy screen went black but the phone still rings…"
-            className="min-h-28 bg-background text-sm"
+            className="min-h-24 bg-background text-xs"
           />
-          <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium" htmlFor="siis">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-medium" htmlFor="siis">
               SIIS reference text
             </label>
             <select
               id="siis"
               value={siisMode}
               onChange={(e) => setSiisMode(e.target.value)}
-              className="h-9 rounded-lg border border-input bg-background px-2 text-sm"
+              className="h-8 rounded-lg border border-input bg-background px-2 text-xs"
             >
               <option value="none">None — engine retrieves / uses cache</option>
               {articles.map((a) => (
                 <option key={a.id} value={a.id}>
-                  {a.id}: {short(a.title, 48)}
+                  {a.id}: {short(a.title, 42)}
                 </option>
               ))}
               <option value="custom">Paste my own…</option>
@@ -267,20 +267,20 @@ export function TroubleshootingConsole() {
                 value={customSiis}
                 onChange={(e) => setCustomSiis(e.target.value)}
                 placeholder="Paste a customer-care article…"
-                className="min-h-28 bg-background font-mono text-xs"
+                className="min-h-24 bg-background font-mono text-[11px]"
               />
             ) : null}
           </div>
-          <Button size="lg" onClick={() => submit()} disabled={loading}>
-            {loading ? <Loader2 className="animate-spin" /> : <Sparkles />}
+          <Button size="sm" className="h-8.5 text-xs font-medium" onClick={() => submit()} disabled={loading}>
+            {loading ? <Loader2 className="size-3.5 animate-spin" /> : <Sparkles className="size-3.5" />}
             Build plan
           </Button>
           {error ? (
-            <p className="flex items-start gap-2 text-sm text-destructive">
-              <TriangleAlert className="mt-0.5 size-4 shrink-0" /> {error}
+            <p className="flex items-start gap-1.5 text-xs text-destructive">
+              <TriangleAlert className="mt-0.5 size-3.5 shrink-0" /> {error}
             </p>
           ) : null}
-          <div className="flex max-h-72 flex-col gap-1.5 overflow-auto pr-1 xl:max-h-none xl:overflow-visible">
+          <div className="flex max-h-56 flex-col gap-1 overflow-auto pr-1">
             <span className="text-xs font-medium text-muted-foreground">Kit complaints (with their SIIS article)</span>
             {examples.map((a) => (
               <button

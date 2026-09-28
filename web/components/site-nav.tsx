@@ -27,7 +27,7 @@ export function SiteNav() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-[1700px] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2.5 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-baseline gap-2">
           <span className="font-heading text-lg font-semibold tracking-tight">Smart Guided Troubleshooting</span>
           <span className="hidden text-xs text-muted-foreground sm:inline">Theme 2 · v2</span>
