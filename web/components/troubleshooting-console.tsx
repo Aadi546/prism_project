@@ -216,21 +216,21 @@ export function TroubleshootingConsole() {
       : null;
 
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
-      <header className="flex max-w-3xl flex-col gap-2">
-        <h1 className="font-heading text-3xl leading-tight font-semibold tracking-tight text-pretty sm:text-4xl">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <header className="flex max-w-3xl flex-col gap-1">
+        <h1 className="font-heading text-2xl leading-tight font-semibold tracking-tight text-pretty sm:text-3xl">
           Vague complaint in. <span className="text-primary">Verified one-tap plan out.</span>
         </h1>
-        <p className="text-sm leading-6 text-muted-foreground sm:text-base">
+        <p className="text-xs leading-5 text-muted-foreground sm:text-sm">
           The engine reads the Samsung knowledge-base article, keeps only steps it can point to in the text, maps each
           Settings step to the exact catalog screen, orders safe → physical → disruptive, and then proves the fix on a
-          simulated device by reading the validation deeplink back.
+          simulated device.
         </p>
       </header>
 
-      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[340px_minmax(0,1fr)_320px]">
+      <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_300px] xl:grid-cols-[320px_minmax(0,1fr)_300px]">
         {/* input */}
-        <section className="flex flex-col gap-4 rounded-xl border border-border bg-card p-4 lg:col-span-2 xl:sticky xl:top-20 xl:col-span-1">
+        <section className="flex flex-col gap-3 rounded-xl border border-border bg-card p-3.5 lg:col-span-2 xl:sticky xl:top-14 xl:col-span-1">
           <label className="text-sm font-medium" htmlFor="query">
             Customer complaint
           </label>
@@ -415,7 +415,7 @@ export function TroubleshootingConsole() {
         </section>
 
         {/* phone */}
-        <aside className="flex flex-col gap-3 lg:sticky lg:top-20">
+        <aside className="flex flex-col gap-2.5 lg:sticky lg:top-14">
           <PhoneSimulator
             screen={screen}
             settings={settings}
@@ -424,7 +424,7 @@ export function TroubleshootingConsole() {
             onBack={() => setScreen(null)}
             sessionId={session}
           />
-          <div className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3 text-xs">
+          <div className="flex flex-col gap-1.5 rounded-xl border border-border bg-card p-2.5 text-xs">
             <div className="flex items-center justify-between">
               <span className="font-medium">Closed-loop check</span>
               <span className="font-mono tabular-nums">
@@ -432,22 +432,23 @@ export function TroubleshootingConsole() {
               </span>
             </div>
             <div className="flex gap-2">
-              <Button size="sm" className="flex-1" disabled={!session || !autoGroups.length || running !== null} onClick={runAll}>
-                <FastForward /> Run safe steps
+              <Button size="sm" className="h-8 flex-1 text-xs" disabled={!session || !autoGroups.length || running !== null} onClick={runAll}>
+                <FastForward className="size-3.5" /> Run safe steps
               </Button>
               <Button
                 size="sm"
                 variant="outline"
+                className="h-8 text-xs"
                 disabled={!result}
                 onClick={() => {
                   autopilot.current = false;
                   if (result) loadSim(result);
                 }}
               >
-                <RotateCcw /> Reset
+                <RotateCcw className="size-3.5" /> Reset
               </Button>
             </div>
-            <p className="leading-4 text-muted-foreground">
+            <p className="leading-3.5 text-[11px] text-muted-foreground">
               Each tap opens the target screen, flips the switch, then re-reads the <span className="font-mono">val/</span>{" "}
               URI against resultType / condition / value.
             </p>
