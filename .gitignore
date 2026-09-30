@@ -1,14 +1,26 @@
+# secrets
 .env
-.env.local
+.env.*
+!.env.example
+
+# python
 __pycache__/
+*.pyc
 .pytest_cache/
 .venv/
-*.pyc
+
+# node / next
 web/node_modules/
 web/.next/
+
+# editor / tool folders, office lock files
+.claude/
+.cursor/
+.vscode/
+.DS_Store
+~$*
+
+# scratch
 .cache/
 engine_cache.json
-.env
-*.env
-
 results.jsonl.tmp
