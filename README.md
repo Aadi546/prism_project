@@ -148,4 +148,4 @@ metrics.md          the performance report from the brief (Appendix C)
 ## Submission
 
 - Presentation: `MSRIT_Brutal Bruteforcers_Submission.pptx`
-- Demo video: _add link here_
+- Demo video: https://youtu.be/HOXW_BEBL_s?si=IO7VcwSyDsOQ5F-9
