@@ -355,6 +355,7 @@ def evaluate(engine_path: str | None, label: str) -> dict:
             "paraphrase": {"n": len(para_ms), "p50": percentile(para_ms, 50), "p95": percentile(para_ms, 95)},
             "cold": {"n": len(cold_ms), "p50": percentile(cold_ms, 50), "p95": percentile(cold_ms, 95)},
         },
+        "llm_share_pct": pct(sum(1 for r in all_resps if str(r["meta"].get("model", "")).startswith("groq/")), len(all_resps)),
         "cost": {"cold_avg_usd": round(statistics.mean(cold_cost), 6) if cold_cost else 0.0, "hit_usd": 0.0},
         "cache": {"paraphrases": para_n, "hit_pct": pct(para_hit, para_n), "wrong_hit_pct": pct(para_wrong, para_n),
                   "miss_pct": pct(para_n - para_hit - para_wrong, para_n)},
@@ -399,7 +400,32 @@ def ablation(base: dict) -> list[dict]:
     return rows
 
 
-def write_markdown(m: dict, before: dict | None, abl: list[dict]) -> str:
+def llm_section(llm: dict | None) -> list[str]:
+    if not llm:
+        return []
+    c, a, l = llm["compliance"], llm["accuracy"], llm["latency"]
+    return [
+        "",
+        "---",
+        "",
+        f"## 5b. LLM mode (Groq `{llm.get('llm_model')}`)",
+        "",
+        "Same scorer and data, with `GROQ_API_KEY` set. The LLM drafts the plan and the paraphrases; every step is still",
+        "re-grounded against the SIIS text and re-validated, and any failed call falls back to the offline path.",
+        "",
+        "| Metric | Offline (headline) | LLM mode |",
+        "| :--- | :--- | :--- |",
+        f"| Plans actually produced by the LLM | 0% | {llm.get('llm_share_pct', 0)}% |",
+        f"| Rule compliance | {{off_rule}}% | {c['rule_compliance_pct']}% |",
+        f"| Step accuracy (0-3) | {{off_step}} | {a['step_accuracy']} |",
+        f"| Deeplink relevance (0-2) | {{off_link}} | {a['deeplink_relevance']} |",
+        f"| Cold P50 / P95 | {{off_p50}} / {{off_p95}} ms | {l['cold']['p50']} / {l['cold']['p95']} ms |",
+        f"| Avg cost per cold query | $0 | ${llm['cost']['cold_avg_usd']:.5f} |",
+        f"| Cache hit rate on 60 paraphrases | {{off_hit}}% | {llm['cache']['hit_pct']}% |",
+    ]
+
+
+def write_markdown(m: dict, before: dict | None, abl: list[dict], llm: dict | None = None) -> str:
     c, a, l, k = m["compliance"], m["accuracy"], m["latency"], m["cache"]
     b = (before or {})
     bc, ba, bl, bk = b.get("compliance", {}), b.get("accuracy", {}), b.get("latency", {}), b.get("cache", {})
@@ -410,7 +436,7 @@ def write_markdown(m: dict, before: dict | None, abl: list[dict]) -> str:
     lines = [
         "# System Performance Metrics & Evaluation Report",
         "",
-        f"**Model(s):** {m['model']}" + (f" (Groq `{m['llm_model']}` for extraction/paraphrases)" if m.get("llm_model") else " — Groq LLM path available with `GROQ_API_KEY`, not used for this run"),
+        f"**Model(s):** {m['model']} (offline headline run)" + (f"; LLM mode measured separately with Groq `{llm['llm_model']}` (section 5b)" if llm else ""),
         "**Embeddings:** TF-IDF word 1–2 grams (catalog & SIIS retrieval), char 3–5 grams (semantic cache)",
         f"**Environment:** {m['environment']}",
         f"**Generated:** {m['generated']} by `python eval/run_metrics.py` — scorer is independent of the engine's own validators",
@@ -475,8 +501,15 @@ def write_markdown(m: dict, before: dict | None, abl: list[dict]) -> str:
     ]
     for r in abl:
         lines.append(f"| {r['variant']} | {r.get('step', '—')} | {r.get('links', '—')} | {r.get('p95', '—')} ms | ${r.get('cost', 0):.4f} | {r.get('note', '')} |")
-    if not m.get("llm_model"):
-        lines.append("| Groq LLM extraction (llama-3.3-70b) | set GROQ_API_KEY and re-run | | | tracked | Drafts grounded + re-validated; falls back on any error |")
+    if llm:
+        lines.append(f"| Groq LLM extraction ({llm['llm_model']}) | {llm['accuracy']['step_accuracy']} | {llm['accuracy']['deeplink_relevance']} | {llm['latency']['cold']['p95']} ms | ${llm['cost']['cold_avg_usd']:.4f} | Drafts re-grounded + re-validated; falls back on any error |")
+    if llm:
+        offline = dict(
+            off_rule=m["compliance"]["rule_compliance_pct"], off_step=m["accuracy"]["step_accuracy"],
+            off_link=m["accuracy"]["deeplink_relevance"], off_p50=m["latency"]["cold"]["p50"],
+            off_p95=m["latency"]["cold"]["p95"], off_hit=m["cache"]["hit_pct"],
+        )
+        lines.extend(row.format(**offline) for row in llm_section(llm))
     loop = m.get("closed_loop", {})
     lines += [
         "",
@@ -510,6 +543,8 @@ def write_markdown(m: dict, before: dict | None, abl: list[dict]) -> str:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--before", help="directory containing a previous `engine` package")
+    ap.add_argument("--mode", choices=("offline", "llm"), default="offline",
+                    help="offline = headline numbers (metrics.json); llm = Groq path (metrics_llm.json)")
     ap.add_argument("--no-ablation", action="store_true")
     args = ap.parse_args()
     os.environ.setdefault("PYTHONHASHSEED", "0")
@@ -519,15 +554,25 @@ def main() -> None:
         print(json.dumps({k: res[k] for k in ("compliance", "cache")}, indent=2))
         print("accuracy", res["accuracy"]["step_accuracy"], res["accuracy"]["deeplink_relevance"])
         return
-    res = evaluate(None, "after (v2)")
-    abl = [] if args.no_ablation else ablation(res)
-    res["ablation"] = abl
+    if args.mode == "llm":
+        os.environ.pop("ENGINE_DISABLE_LLM", None)
+        res = evaluate(None, "after (v2, llm)")
+        if not res.get("llm_model"):
+            raise SystemExit("LLM mode needs GROQ_API_KEY (and a live GROQ_MODEL); nothing written.")
+        (EVAL / "metrics_llm.json").write_text(json.dumps(res, indent=2), encoding="utf-8")
+    else:
+        os.environ["ENGINE_DISABLE_LLM"] = "1"  # headline numbers are the offline path
+        res = evaluate(None, "after (v2)")
+        res["ablation"] = [] if args.no_ablation else ablation(res)
+        (EVAL / "metrics.json").write_text(json.dumps(res, indent=2), encoding="utf-8")
+    m = json.loads((EVAL / "metrics.json").read_text(encoding="utf-8"))
+    llm_path = EVAL / "metrics_llm.json"
+    llm = json.loads(llm_path.read_text(encoding="utf-8")) if llm_path.exists() else None
     before_path = EVAL / "metrics_before.json"
     before = json.loads(before_path.read_text(encoding="utf-8")) if before_path.exists() else None
-    (EVAL / "metrics.json").write_text(json.dumps(res, indent=2), encoding="utf-8")
-    (ROOT / "metrics.md").write_text(write_markdown(res, before, abl), encoding="utf-8")
+    (ROOT / "metrics.md").write_text(write_markdown(m, before, m.get("ablation", []), llm), encoding="utf-8")
     print(json.dumps({k: res[k] for k in ("compliance", "latency", "cache", "closed_loop")}, indent=2))
-    print("accuracy", res["accuracy"]["step_accuracy"], res["accuracy"]["deeplink_relevance"])
+    print("accuracy", res["accuracy"]["step_accuracy"], res["accuracy"]["deeplink_relevance"], "llm share", res.get("llm_share_pct"))
 
 
 if __name__ == "__main__":

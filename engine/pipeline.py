@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+from concurrent.futures import ThreadPoolExecutor
 import os
 import re
 import time
@@ -23,6 +24,7 @@ from engine.validate import collect_urls, rule_violations
 from engine.verify import DeviceSimulator, is_verifiable
 
 ENGINE_MODEL = "deterministic-hybrid-v2"
+_POOL = ThreadPoolExecutor(max_workers=4)
 NO_MATCH = "no_match"
 NO_SIIS = "no_siis_context"
 RETRIEVAL_FLOOR = 0.12  # below this no SIIS article is about the complaint
@@ -118,6 +120,8 @@ class TroubleshootingEngine:
             info["cache"] = {"hit": False}
 
         contexts, cost, fallback, model_used, retrievals, extractions = [], 0.0, None, ENGINE_MODEL, [], []
+        # paraphrase call runs next to extraction, so a cold LLM request costs max() not sum() of the two
+        para_job = _POOL.submit(self._paraphrases, eq, info) if self.llm.enabled else None
         intents = eq.intents if (not provided and len(eq.intents) > 1) else [eq.cleaned]
         for intent in intents:
             article, rel, retrieval = self._retrieve(intent, siis_response if provided else None, content_only=multi)
@@ -145,9 +149,15 @@ class TroubleshootingEngine:
 
         resp = TroubleshootResponse(
             query=query,
-            query_variations=self._paraphrases(eq, info),
+            query_variations=para_job.result() if para_job else self._paraphrases(eq, info),
             response=ContextDeeplinkResponse(contexts=contexts),
-            meta=ResponseMeta(latency_ms=0.0, cache_hit=False, model=model_used, cost_usd=round(cost, 6), fallback=fallback),
+            meta=ResponseMeta(
+                latency_ms=0.0,
+                cache_hit=False,
+                model=model_used,
+                cost_usd=round(cost + info["llm"].get("paraphrase_cost", 0.0), 6),
+                fallback=fallback,
+            ),
         )
         assert not collect_urls(resp.response.model_dump_json()), "URL leak"
         sw.lap("assemble")
@@ -285,8 +295,8 @@ class TroubleshootingEngine:
             res = self.llm.paraphrase(eq.cleaned)
             items = [str(p).strip() for p in (res.data or {}).get("paraphrases", []) if str(p).strip()]
             items = list(dict.fromkeys([eq.cleaned, *items]))
+            info["llm"]["paraphrase_cost"] = res.cost_usd  # billed even if we end up using the templates
             if 8 <= len(items):
-                info["llm"]["paraphrase_cost"] = res.cost_usd
                 return items[:10]
         return eq.paraphrases
 

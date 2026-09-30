@@ -34,7 +34,7 @@ except ImportError:
                 os.environ.setdefault(_k.strip(), _v.strip().strip("'\""))
 
 GROQ_BASE_URL = "https://api.groq.com/openai/v1"
-DEFAULT_MODEL = "llama-3.3-70b-versatile"
+DEFAULT_MODEL = "openai/gpt-oss-120b"  # llama-3.3-70b was retired on Groq (404)
 # USD per 1M tokens (input, output) — public Groq price list; override with GROQ_PRICE_IN/OUT.
 PRICES = {
     "llama-3.3-70b-versatile": (0.59, 0.79),
@@ -71,7 +71,7 @@ class LLMResult:
 
 
 class GroqClient:
-    def __init__(self, api_key: str | None = None, model: str | None = None, timeout: float = 6.0):
+    def __init__(self, api_key: str | None = None, model: str | None = None, timeout: float = 10.0):
         self.api_key = api_key or os.environ.get("GROQ_API_KEY")
         self.model = model or os.environ.get("GROQ_MODEL") or DEFAULT_MODEL
         self.timeout = float(os.environ.get("GROQ_TIMEOUT", timeout))

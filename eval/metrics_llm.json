@@ -1,8 +1,8 @@
 {
-  "label": "after (v2)",
-  "generated": "2026-09-30 19:28",
-  "model": "deterministic-hybrid-v2",
-  "llm_model": null,
+  "label": "after (v2, llm)",
+  "generated": "2026-09-30 19:30",
+  "model": "groq/openai/gpt-oss-120b",
+  "llm_model": "openai/gpt-oss-120b",
   "environment": "12 vCPU / Windows 11 / Python 3.13.4",
   "compliance": {
     "responses": 40,
@@ -12,7 +12,7 @@
     "url_leaks": 0,
     "catalog_validity_pct": 100.0,
     "auto_with_link_pct": 100.0,
-    "verifiable_validation_pct": 42.9,
+    "verifiable_validation_pct": 46.2,
     "empty_contexts": 0
   },
   "accuracy": {
@@ -23,16 +23,11 @@
         "id": "row_1",
         "title": "Screen flicker issue",
         "step": 2.833,
-        "completeness": 0.833,
+        "completeness": 1.0,
         "grounded": 1.0,
-        "ordering": 1.0,
-        "links": 2.0,
-        "link_detail": [
-          {
-            "pattern": "tap wi-?fi",
-            "score": 2.0
-          }
-        ],
+        "ordering": 0.833,
+        "links": null,
+        "link_detail": [],
         "score": 0.71
       },
       {
@@ -267,23 +262,23 @@
   "latency": {
     "exact": {
       "n": 38,
-      "p50": 0.98,
-      "p95": 2.07
+      "p50": 0.3,
+      "p95": 0.81
     },
     "paraphrase": {
       "n": 59,
-      "p50": 19.3,
-      "p95": 33.26
+      "p50": 6.3,
+      "p95": 8.89
     },
     "cold": {
       "n": 40,
-      "p50": 29.52,
-      "p95": 109.59
+      "p50": 133.12,
+      "p95": 2011.34
     }
   },
-  "llm_share_pct": 0.0,
+  "llm_share_pct": 5.0,
   "cost": {
-    "cold_avg_usd": 0.0,
+    "cold_avg_usd": 5.3e-05,
     "hit_usd": 0.0
   },
   "cache": {
@@ -364,31 +359,5 @@
         "Blank screen display"
       ]
     ]
-  },
-  "ablation": [
-    {
-      "variant": "Hybrid: verbatim setting name, then TF-IDF over descriptions (default)",
-      "step": 2.94,
-      "links": 2.0,
-      "p95": 109.59,
-      "cost": 0.0,
-      "note": "auto actions with link 100.0%, verifiable 42.9%"
-    },
-    {
-      "variant": "Pure rules: verbatim setting names only",
-      "step": 2.94,
-      "links": 2.0,
-      "p95": 107.82,
-      "cost": 0.0,
-      "note": "auto actions with link 100.0%, verifiable 42.9%"
-    },
-    {
-      "variant": "Pure TF-IDF retrieval over descriptions",
-      "step": 2.94,
-      "links": 1.33,
-      "p95": 107.12,
-      "cost": 0.0,
-      "note": "auto actions with link 100.0%, verifiable 33.3%"
-    }
-  ]
+  }
 }
